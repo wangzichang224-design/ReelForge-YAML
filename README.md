@@ -128,6 +128,58 @@ Open the local Streamlit URL and keep **使用离线 Demo 生成器** checked fo
 - `Base URL`, for example `https://api.deepseek.com`
 - `Model`, for example `deepseek-chat`
 
+## Demo Video
+
+赛事要求 demo 视频需包含声音讲解、核心功能展示和可访问外链。当前 README 先保留提交位，最终提交前请替换为实际视频链接：
+
+- Demo video: `TODO: paste bilibili / cloud drive link before final submission`
+
+建议视频结构：
+
+1. 说明题目要求和用户痛点：小说作者需要低门槛获得可编辑剧本初稿。
+2. 展示输入 3 章小说文本，自动拆章。
+3. 展示生成 YAML：`series_metadata`、`characters`、`episodes`、`shots`、`source_map`。
+4. 展示“测评与优化”区：badcase、分项分、cliffhanger 备选、局部修改。
+5. 展示导出 YAML 和 Schema 文档。
+
+## Contest Submission Notes
+
+为了匹配赛事提交要求，本仓库采用以下交付规范：
+
+- **Repository visibility**: 开发过程可保持私有以防抄袭；提交截止后需公开 GitHub/Gitee 仓库，供评委访问。
+- **PR-first workflow**: 后续所有新功能、文档补充和修复都应通过独立分支 + Pull Request 合并，不再直接提交到 `main`。
+- **Small PRs**: 每个 PR 只做一件事，例如“补 Schema 文档”“新增评测模块”“更新 demo 视频链接”。
+- **PR description**: 使用 `.github/pull_request_template.md`，必须填写功能描述、实现思路、测试方式和原创/依赖说明。
+- **Runnable main**: PR 合并前必须通过 `python -m pytest`，保证评委任意时间拉取 `main` 都能复现 demo。
+- **Commit timing**: 后续 commit 和 PR 时间应落在赛事所选批次的起止时间内；不要在最后一天一次性导入全部代码。
+
+提交前清单见 [docs/SUBMISSION_CHECKLIST.md](docs/SUBMISSION_CHECKLIST.md)。
+
+## Dependencies & Original Work
+
+Third-party dependencies are intentionally lightweight and listed in [requirements.txt](requirements.txt):
+
+| Dependency | Purpose |
+| --- | --- |
+| `streamlit` | Product demo UI |
+| `pydantic` | Strict schema validation |
+| `PyYAML` | YAML export/import |
+| `openai` | OpenAI-compatible client for DeepSeek or similar models |
+| `pytest` | Regression tests |
+
+Original implementation in this repository includes:
+
+- Novel chapter parsing and minimum 3-chapter validation.
+- Pydantic YAML Schema for vertical short-drama scripts.
+- JSON-first generation pipeline with YAML export.
+- Source provenance through `source_ref` and `source_map`.
+- Rule-based quality evaluator and badcase reporting.
+- Global visual scratchpad / `visual_bible` injection.
+- Critic-generator local optimization loop.
+- Streamlit human-in-the-loop editing and evaluation interface.
+
+Referenced open-source projects are listed in [References](#references). They are used as product and architecture references only; this repository implements its own schema, pipeline, evaluator, UI and tests.
+
 ## DeepSeek Evaluation Sample
 
 This repo includes a golden dataset, a generated evaluation novel and a real DeepSeek output:
