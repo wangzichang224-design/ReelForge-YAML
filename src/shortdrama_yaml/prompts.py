@@ -46,6 +46,14 @@ def build_generation_prompt(
         "tone": tone,
         "target_style": target_style,
         "shots_per_episode": shots_per_episode,
+        "hard_constraints": [
+            f"每一集 shots 数量必须恰好为 {shots_per_episode} 个，不能少于 {shots_per_episode} 个，也不能多于 {shots_per_episode} 个。",
+            "每一集第 1 个 shot 的 purpose 必须是 opening_hook。",
+            "每一集最后 1 个 shot 的 purpose 必须是 cliffhanger。",
+            "每个 shot 必须包含 visual_track、audio_track、source_ref。",
+            "visual_track.video_prompt 必须为英文，并显式包含 vertical 9:16 或 9:16。",
+            "不要为了节省篇幅省略镜头；即使剧情短，也必须拆成足够数量的可拍镜头。",
+        ],
         "input_chapter_count": len(chapters),
         "chapters": chapter_payload,
         "required_json_schema": script_json_schema(),
@@ -58,9 +66,17 @@ def build_generation_prompt(
 
 
 def build_repair_prompt(payload: dict, validation_error: str) -> str:
+    expected_shots = _infer_expected_shots(payload)
     repair_payload = {
         "task": "repair_invalid_short_drama_script_json",
         "validation_error": validation_error,
+        "hard_repair_rules": [
+            f"重点修复：每个 episode.shots 必须补足到 {expected_shots} 个 shot。",
+            "不要删除 episode；不要删除 source_map。",
+            "补充镜头时必须使用同一章节的 source_excerpt，并保持 opening_hook 和 cliffhanger 位置。",
+            "所有新增 video_prompt 必须是英文，并包含 vertical 9:16。",
+            "输出完整 JSON object，不要只输出补丁。",
+        ],
         "required_json_schema": script_json_schema(),
         "invalid_json": payload,
     }
@@ -78,3 +94,15 @@ def _clip_chapter(text: str, limit: int = 6500) -> str:
     head = clean[: limit // 2]
     tail = clean[-limit // 2 :]
     return f"{head}\n\n...[中间内容为控制上下文已省略，但请保持剧情因果]...\n\n{tail}"
+
+
+def _infer_expected_shots(payload: dict) -> int:
+    episodes = payload.get("episodes", [])
+    shot_counts = [
+        len(episode.get("shots", []))
+        for episode in episodes
+        if isinstance(episode, dict) and isinstance(episode.get("shots"), list)
+    ]
+    if not shot_counts:
+        return 10
+    return max(10, min(15, max(shot_counts + [10])))

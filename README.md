@@ -87,6 +87,31 @@ Open the local Streamlit URL and keep **使用离线 Demo 生成器** checked fo
 - `Base URL`, for example `https://api.deepseek.com`
 - `Model`, for example `deepseek-chat`
 
+## DeepSeek Evaluation Sample
+
+This repo includes a generated evaluation novel and a real DeepSeek output:
+
+- Input novel: [samples/eval_novel_shadow_contract_3ch.txt](samples/eval_novel_shadow_contract_3ch.txt)
+- DeepSeek output: [samples/deepseek_shadow_contract_3ch_output.yaml](samples/deepseek_shadow_contract_3ch_output.yaml)
+
+Run the same evaluation locally:
+
+```powershell
+$env:DEEPSEEK_API_KEY="your-api-key"
+python scripts\run_deepseek_generation.py `
+  --input samples\eval_novel_shadow_contract_3ch.txt `
+  --output samples\deepseek_shadow_contract_3ch_output.yaml `
+  --model deepseek-chat `
+  --shots 10
+```
+
+The checked-in DeepSeek sample passes the project schema with:
+
+- 3 input chapters
+- 3 generated episodes
+- 30 total shots
+- 0 quality warnings
+
 ## Test
 
 ```powershell
@@ -114,6 +139,7 @@ src/shortdrama_yaml/chapter_parser.py      Chapter boundary parser
 src/shortdrama_yaml/pipeline.py            Parse → generate → validate → export
 src/shortdrama_yaml/llm_client.py          DeepSeek/OpenAI-compatible JSON mode
 src/shortdrama_yaml/offline_generator.py   No-key demo generator
+scripts/run_deepseek_generation.py         Real API evaluation runner
 docs/YAML_SCHEMA.md                        Schema design rationale
 samples/sample_novel_three_chapters.txt    Demo input
 tests/                                     Regression tests
