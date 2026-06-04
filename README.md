@@ -30,6 +30,7 @@ ReelForge YAML 的目标是先把“小说 → 短剧分集 → 镜头级分镜 
 - **Schema-first output**: 模型先输出 JSON，经 Pydantic 校验后再导出 YAML。
 - **Source Map provenance**: 每集/每镜头绑定原文片段，方便作者回改和验真。
 - **Video-ready prompts**: 每个镜头包含英文 `video_prompt`，适配主流图生视频/文生视频模型。
+- **Quality evaluation loop**: 用硬指标评测黄金三秒、结尾钩子、权力翻转、视觉可执行性、角色连续性和来源可追溯性。
 - **Human-in-the-loop editor**: Streamlit UI 支持 YAML 编辑、重新校验和导出。
 - **DeepSeek/OpenAI-compatible**: 支持 DeepSeek 或其他国产兼容 API；没有 API key 也可用离线 demo 生成器演示。
 
@@ -89,10 +90,13 @@ Open the local Streamlit URL and keep **使用离线 Demo 生成器** checked fo
 
 ## DeepSeek Evaluation Sample
 
-This repo includes a generated evaluation novel and a real DeepSeek output:
+This repo includes a golden dataset, a generated evaluation novel and a real DeepSeek output:
 
+- Golden dataset targets: [samples/golden_dataset.yaml](samples/golden_dataset.yaml)
 - Input novel: [samples/eval_novel_shadow_contract_3ch.txt](samples/eval_novel_shadow_contract_3ch.txt)
-- DeepSeek output: [samples/deepseek_shadow_contract_3ch_output.yaml](samples/deepseek_shadow_contract_3ch_output.yaml)
+- Quiet transition test: [samples/eval_novel_quiet_transition_3ch.txt](samples/eval_novel_quiet_transition_3ch.txt)
+- Raw DeepSeek output: [samples/deepseek_shadow_contract_3ch_output.yaml](samples/deepseek_shadow_contract_3ch_output.yaml)
+- Optimized output: [samples/deepseek_shadow_contract_3ch_optimized.yaml](samples/deepseek_shadow_contract_3ch_optimized.yaml)
 
 Run the same evaluation locally:
 
@@ -105,12 +109,38 @@ python scripts\run_deepseek_generation.py `
   --shots 10
 ```
 
-The checked-in DeepSeek sample passes the project schema with:
+Then run the hard-metric evaluator:
+
+```powershell
+python scripts\evaluate_yaml.py --input samples\deepseek_shadow_contract_3ch_output.yaml
+python scripts\evaluate_yaml.py `
+  --input samples\deepseek_shadow_contract_3ch_output.yaml `
+  --scratchpad `
+  --optimize `
+  --output samples\deepseek_shadow_contract_3ch_optimized.yaml
+```
+
+The raw DeepSeek sample already passes the structural schema:
 
 - 3 input chapters
 - 3 generated episodes
 - 30 total shots
-- 0 quality warnings
+
+But the evaluator catches the key badcase: all 3 episodes label the first shot as `opening_hook`, while the actual picture still starts with atmosphere or setup. Raw scores:
+
+- overall_score = 0.811
+- badcases = 14
+- episode hook_score = 0.20 / 0.40 / 0.55
+
+After enabling the global scratchpad and local critic rewrite:
+
+- overall_score = 0.95
+- episodes = 3
+- shots = 30
+- remaining badcases = 3 provenance notes for shots explicitly marked as adapted from context
+- each episode passes hook, cliffhanger, power shift, visual executability and continuity thresholds
+
+Design notes for this loop are in [docs/EVALUATION.md](docs/EVALUATION.md).
 
 ## Test
 
@@ -127,6 +157,8 @@ Current regression checks cover:
 - Enforcing `opening_hook` as the first shot and `cliffhanger` as the last shot.
 - Requiring English video prompts.
 - Preserving source references through `source_map`.
+- Detecting fake opening hooks, weak cliffhangers, missing power shifts, abstract video prompts and character drift.
+- Verifying the local critic loop repairs the checked-in DeepSeek badcase without changing episode or shot count.
 
 ## Project Structure
 
@@ -139,8 +171,14 @@ src/shortdrama_yaml/chapter_parser.py      Chapter boundary parser
 src/shortdrama_yaml/pipeline.py            Parse → generate → validate → export
 src/shortdrama_yaml/llm_client.py          DeepSeek/OpenAI-compatible JSON mode
 src/shortdrama_yaml/offline_generator.py   No-key demo generator
+src/shortdrama_yaml/evaluator.py           Rule-based quality metrics
+src/shortdrama_yaml/critic.py              Expert critic agent wrapper
+src/shortdrama_yaml/scratchpad.py          Global visual bible extraction/injection
+src/shortdrama_yaml/iteration.py           Critic-generator local rewrite loop
 scripts/run_deepseek_generation.py         Real API evaluation runner
+scripts/evaluate_yaml.py                   YAML quality evaluator and optimizer
 docs/YAML_SCHEMA.md                        Schema design rationale
+docs/EVALUATION.md                         Badcase evaluation rationale
 samples/sample_novel_three_chapters.txt    Demo input
 tests/                                     Regression tests
 ```
@@ -151,6 +189,7 @@ tests/                                     Regression tests
 - **JSON first, YAML second**: JSON is easier to validate; YAML is easier for authors to edit.
 - **Audio/visual separation**: `visual_track` serves image/video models; `audio_track` serves TTS, SFX and editing.
 - **Provenance by default**: `source_ref` and `source_map` reduce hallucination risk and support human review.
+- **Evaluate before celebrating**: schema validity only proves the YAML shape is correct; hard metrics prove whether it behaves like vertical short drama.
 - **Extensible pipeline**: the schema is ready for future modules such as role reference images, shot video generation, TTS and MoviePy/FFmpeg assembly.
 
 ## References

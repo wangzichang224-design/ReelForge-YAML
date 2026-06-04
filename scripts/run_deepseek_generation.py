@@ -26,6 +26,8 @@ def main() -> None:
     parser.add_argument("--model", default=os.getenv("DEEPSEEK_MODEL", "deepseek-chat"))
     parser.add_argument("--base-url", default=os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com"))
     parser.add_argument("--shots", type=int, default=10)
+    parser.add_argument("--scratchpad", action="store_true")
+    parser.add_argument("--critic-loop", action="store_true")
     args = parser.parse_args()
 
     api_key = os.getenv("DEEPSEEK_API_KEY")
@@ -53,6 +55,8 @@ def main() -> None:
                 timeout_seconds=180,
                 use_offline_demo=False,
             ),
+            enable_scratchpad=args.scratchpad,
+            enable_critic_loop=args.critic_loop,
         ),
     )
     output_path.write_text(result.yaml_text, encoding="utf-8")

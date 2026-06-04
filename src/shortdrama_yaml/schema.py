@@ -25,6 +25,15 @@ ShotPurpose = Literal[
     "transition",
 ]
 
+QualityMetric = Literal[
+    "hook",
+    "cliffhanger",
+    "power_shift",
+    "visual_executability",
+    "continuity",
+    "provenance",
+]
+
 
 class StrictModel(BaseModel):
     model_config = ConfigDict(extra="forbid", populate_by_name=True)
@@ -52,6 +61,23 @@ class Character(StrictModel):
     visual_consistency_prompt: str = Field(min_length=20)
     voice_profile: str = Field(min_length=1)
     first_appearance_chapter: str = Field(min_length=1)
+
+
+class VisualAsset(StrictModel):
+    character_id: str = Field(min_length=1)
+    name: str = Field(min_length=1)
+    locked_traits: list[str] = Field(default_factory=list)
+    wardrobe: str = Field(default="")
+    visual_prompt: str = Field(min_length=20)
+    negative_drift_terms: list[str] = Field(default_factory=list)
+
+
+class VisualBible(StrictModel):
+    global_style: str = Field(min_length=1)
+    palette: list[str] = Field(default_factory=list)
+    key_locations: list[str] = Field(default_factory=list)
+    key_props: list[str] = Field(default_factory=list)
+    characters: list[VisualAsset] = Field(default_factory=list)
 
 
 class SourceRef(StrictModel):
@@ -142,16 +168,45 @@ class SourceMapEntry(StrictModel):
         return re.sub(r"\s+", " ", value).strip()[:320]
 
 
+class QualityBadcase(StrictModel):
+    metric: QualityMetric
+    severity: Literal["low", "medium", "high"]
+    target_path: str = Field(min_length=1)
+    reason: str = Field(min_length=1)
+    root_cause: str = Field(min_length=1)
+    repair_suggestion: str = Field(min_length=1)
+    source_excerpt: str | None = None
+
+
+class EpisodeQualityScore(StrictModel):
+    episode_number: int = Field(ge=1)
+    hook_score: float = Field(ge=0, le=1)
+    cliffhanger_score: float = Field(ge=0, le=1)
+    power_shift_score: float = Field(ge=0, le=1)
+    visual_executability_score: float = Field(ge=0, le=1)
+    continuity_score: float = Field(ge=0, le=1)
+    provenance_score: float = Field(ge=0, le=1)
+    overall_score: float = Field(ge=0, le=1)
+    passed: bool
+    cliffhanger_options: list[str] = Field(default_factory=list)
+
+
 class QualityReport(StrictModel):
     input_chapter_count: int = Field(ge=0)
     total_episodes: int = Field(ge=0)
     total_shots: int = Field(ge=0)
     schema_valid: bool
     warnings: list[str] = Field(default_factory=list)
+    overall_score: float | None = Field(default=None, ge=0, le=1)
+    episode_scores: list[EpisodeQualityScore] = Field(default_factory=list)
+    badcases: list[QualityBadcase] = Field(default_factory=list)
+    root_causes: list[str] = Field(default_factory=list)
+    repair_suggestions: list[str] = Field(default_factory=list)
 
 
 class ScriptDocument(StrictModel):
     series_metadata: SeriesMetadata
+    visual_bible: VisualBible | None = None
     characters: list[Character] = Field(min_length=1)
     episodes: list[Episode] = Field(min_length=1)
     source_map: list[SourceMapEntry] = Field(min_length=1)

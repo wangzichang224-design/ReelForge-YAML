@@ -6,8 +6,11 @@ from dataclasses import dataclass
 from pydantic import ValidationError
 
 from .chapter_parser import Chapter, split_chapters, validate_minimum_chapters
+from .evaluator import evaluate_document
+from .iteration import run_critic_generator_loop
 from .llm_client import LLMConfig, LLMGenerationError, OpenAICompatibleJSONClient
 from .schema import QualityReport, ScriptDocument
+from .scratchpad import apply_visual_bible, inject_visual_traits_into_prompts
 from .yaml_io import document_to_yaml
 
 ProgressCallback = Callable[[str, float], None]
@@ -21,6 +24,10 @@ class ConversionOptions:
     target_style: str = "竖屏短剧，黄金三秒强冲突，结尾钩子"
     shots_per_episode: int = 10
     llm_config: LLMConfig = LLMConfig()
+    enable_scratchpad: bool = False
+    enable_critic_loop: bool = False
+    max_critic_rounds: int = 2
+    use_llm_critic: bool = False
 
 
 @dataclass(frozen=True)
@@ -61,16 +68,35 @@ def convert_novel_text(
     _progress(progress_callback, "短剧改编：校验分集、钩子和镜头密度", 0.62)
     document = _validate_or_repair(payload, client=client, config=options.llm_config)
 
-    _progress(progress_callback, "质量评估：检查 source_map、英文 prompt、镜头数", 0.78)
-    warnings.extend(_quality_warnings(document, len(chapters)))
-    quality_report = QualityReport(
-        input_chapter_count=len(chapters),
-        total_episodes=len(document.episodes),
-        total_shots=sum(len(episode.shots) for episode in document.episodes),
-        schema_valid=True,
-        warnings=warnings,
-    )
-    document = document.model_copy(update={"quality_report": quality_report})
+    _progress(progress_callback, "全局黑板：固定角色视觉资产", 0.7)
+    if options.enable_scratchpad:
+        document = apply_visual_bible(document)
+        document = inject_visual_traits_into_prompts(document)
+
+    _progress(progress_callback, "质量评估：检查网感、钩子、视觉可执行性", 0.78)
+    structural_warnings = _quality_warnings(document, len(chapters))
+    warnings.extend(structural_warnings)
+    if options.enable_critic_loop:
+        iteration = run_critic_generator_loop(
+            document,
+            input_chapter_count=len(chapters),
+            structural_warnings=warnings,
+            max_rounds=options.max_critic_rounds,
+            client=client,
+            config=options.llm_config,
+            use_llm_critic=options.use_llm_critic,
+        )
+        document = iteration.document
+        warnings = document.quality_report.warnings if document.quality_report else warnings
+    else:
+        quality_report = evaluate_document(
+            document,
+            input_chapter_count=len(chapters),
+            structural_warnings=warnings,
+            visual_bible=document.visual_bible,
+        )
+        document = document.model_copy(update={"quality_report": quality_report})
+        warnings = quality_report.warnings
 
     _progress(progress_callback, "校验导出：生成可编辑 YAML", 0.92)
     yaml_text = document_to_yaml(document)

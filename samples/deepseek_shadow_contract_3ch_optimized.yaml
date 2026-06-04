@@ -1,0 +1,1018 @@
+series_metadata:
+  schema_version: 1.0.0
+  title: 影子合约
+  source_type: web_novel
+  target_format: vertical_short_drama
+  genre: 都市商战 / 复仇反转
+  tone: 强冲突、证据反转、冷感商战、短剧钩子
+  language: zh-CN
+  aspect_ratio: '9:16'
+  episode_duration_target: 60-120s
+visual_bible:
+  global_style: 都市商战 / 复仇反转，强冲突、证据反转、冷感商战、短剧钩子，9:16 竖屏短剧，写实现代商业影像风格
+  palette:
+  - deep charcoal
+  - cold cyan
+  - warm amber
+  - rainy glass reflections
+  key_locations:
+  - 会议室
+  - 地下车库
+  - 玻璃门
+  - 金融街
+  - 顶楼
+  key_props:
+  - U 盘
+  - U盘
+  - 咖啡杯
+  - 手机
+  - 投影屏
+  - 支票
+  - 文件袋
+  - 花束
+  characters:
+  - character_id: char_xutinglan
+    name: 许听澜
+    locked_traits:
+    - A young Chinese woman in her late 20s
+    - sharp features
+    - wet black hair
+    - black suit soaked by rain
+    - determined eyes
+    wardrobe: black suit soaked by rain
+    visual_prompt: A young Chinese woman in her late 20s, sharp features, wet black hair, black suit soaked by rain, determined
+      eyes, vertical 9:16.
+    negative_drift_terms:
+    - red dress
+    - white shirt
+    - school uniform
+    - ancient costume
+    - teenage
+    - old man
+    - old woman
+  - character_id: char_gu_chengyan
+    name: 顾承言
+    locked_traits:
+    - A handsome Chinese man in his early 30s
+    - tailored black suit
+    - cold eyes
+    wardrobe: tailored black suit
+    visual_prompt: A handsome Chinese man in his early 30s, tailored black suit, cold eyes, holding a black umbrella, vertical
+      9:16.
+    negative_drift_terms:
+    - red dress
+    - white shirt
+    - school uniform
+    - ancient costume
+    - teenage
+    - old man
+    - old woman
+  - character_id: char_xu_mingwei
+    name: 许明薇
+    locked_traits:
+    - A young Chinese woman in white designer dress
+    - sweet smile but cold eyes
+    wardrobe: A young Chinese woman in white designer dress
+    visual_prompt: A young Chinese woman in white designer dress, sweet smile but cold eyes, holding bouquet, vertical 9:16.
+    negative_drift_terms:
+    - red dress
+    - white shirt
+    - school uniform
+    - ancient costume
+    - teenage
+    - old man
+    - old woman
+  - character_id: char_shen_yanbai
+    name: 沈砚白
+    locked_traits:
+    - A tall Chinese man in his late 30s
+    - sharp suit
+    - calm and commanding presence
+    - dark eyes
+    wardrobe: sharp suit
+    visual_prompt: A tall Chinese man in his late 30s, sharp suit, calm and commanding presence, dark eyes, vertical 9:16.
+    negative_drift_terms:
+    - red dress
+    - white shirt
+    - school uniform
+    - ancient costume
+    - teenage
+    - old man
+    - old woman
+characters:
+- character_id: char_xutinglan
+  name: 许听澜
+  role: 女主角，被陷害的项目经理
+  relationship: 顾承言前未婚妻，许明薇同父异母姐姐
+  motivation: 洗清冤屈，揭露顾家与许明薇的阴谋
+  visual_consistency_prompt: A young Chinese woman in her late 20s, sharp features, wet black hair, black suit soaked by rain,
+    determined eyes, vertical 9:16.
+  voice_profile: 冷静中带颤抖，后期坚定
+  first_appearance_chapter: ch001
+- character_id: char_gu_chengyan
+  name: 顾承言
+  role: 顾氏资本太子爷，反派
+  relationship: 许听澜前未婚夫，许明薇未婚夫
+  motivation: 掩盖养老金挪用，维护家族利益
+  visual_consistency_prompt: A handsome Chinese man in his early 30s, tailored black suit, cold eyes, holding a black umbrella,
+    vertical 9:16.
+  voice_profile: 冷漠，居高临下
+  first_appearance_chapter: ch001
+- character_id: char_xu_mingwei
+  name: 许明薇
+  role: 女配角，许听澜同父异母妹妹
+  relationship: 许听澜妹妹，顾承言未婚妻
+  motivation: 夺取家产，陷害姐姐
+  visual_consistency_prompt: A young Chinese woman in white designer dress, sweet smile but cold eyes, holding bouquet, vertical
+    9:16.
+  voice_profile: 温柔带刺
+  first_appearance_chapter: ch001
+- character_id: char_shen_yanbai
+  name: 沈砚白
+  role: 盛曜集团执行董事，神秘盟友
+  relationship: 许听澜的雇主/合作者
+  motivation: 完成债务重组，可能另有目的
+  visual_consistency_prompt: A tall Chinese man in his late 30s, sharp suit, calm and commanding presence, dark eyes, vertical
+    9:16.
+  voice_profile: 低沉，冷静，权威
+  first_appearance_chapter: ch001
+episodes:
+- episode_number: 1
+  episode_title: 雨夜封口费
+  source_chapter_id: ch001
+  hook_summary: 许听澜被未婚夫和妹妹联手陷害，雨中撕毁支票，被神秘人沈砚白带走。
+  emotional_curve:
+  - 震惊
+  - 愤怒
+  - 绝望
+  - 反转
+  cliffhanger: 沈砚白说：你手里的东西，顾家买不起。
+  estimated_duration_seconds: 90.0
+  shots:
+  - shot_id: e1s1
+    duration_seconds: 4.0
+    purpose: opening_hook
+    characters:
+    - char_xutinglan
+    - char_gu_chengyan
+    - char_xu_mingwei
+    visual_track:
+      framing: close_up
+      camera_movement: fast push-in
+      visual_notes_zh: 黄金三秒：直接切入当众羞辱、证据逼问或权力压迫，人物正面冲突先于环境铺垫。 原镜头：保安拦住许听澜，顾承言和许明薇从玻璃门内走出
+      video_prompt: 'close up shot, fast push-in, the character is standing, holding a visible prop, pointing or looking at
+        evidence, visible facial expression, cinematic lighting, vertical 9:16. Close-up shot, fast push-in camera, a public
+        confrontation erupts in the first three seconds, char_xutinglan, char_gu_chengyan, char_xu_mingwei face each other
+        under harsh dramatic lighting, one character points at evidence or blocks the other, shocked bystanders in the background,
+        concrete gestures, vertical 9:16, high-tension short drama style. Source action: Medium shot of a security guard blocking
+        a woman at a glass door, a man in suit and woman in white dress walking out from inside, rain visible, vertical 9:16,
+        neon city lights. Character consistency: A young Chinese woman in her late 20s, sharp features, wet black hair, black
+        suit soaked by rain, determined eyes, vertical 9:16.; A handsome Chinese man in his early 30s, tailored black suit,
+        cold eyes, holding a black umbrella, vertical 9:16.; A young Chinese woman in white designer dress, sweet smile but
+        cold eyes, holding bouquet, vertical 9:16..'
+    audio_track:
+      dialogue:
+      - speaker: 保安
+        text: 许小姐，顾总说了，你已经不是顾氏的人。
+        tts_emotion: neutral
+      sfx:
+      - rain
+      - door opening
+      music: ''
+    source_ref:
+      chapter_id: ch001
+      chapter_title: 第一章 雨夜封口费
+      source_excerpt: 保安把她拦在旋转门外：“许小姐，顾总说了，你已经不是顾氏的人。”玻璃门内，顾承言撑着一把黑伞走出来。
+  - shot_id: e1s2
+    duration_seconds: 5.0
+    purpose: emotional_pressure
+    characters:
+    - char_xutinglan
+    visual_track:
+      framing: extreme_close_up
+      camera_movement: static
+      visual_notes_zh: 雨水顺着睫毛滴落，眼神绝望
+      video_prompt: 'extreme close up shot, static, the character is standing, holding a visible prop, pointing or looking
+        at evidence, visible facial expression, cinematic lighting, vertical 9:16. Extreme close-up of a young Chinese woman''s
+        face in rain, tears mixing with raindrops, wet black hair, dark city background, vertical 9:16, cinematic lighting.
+        Character consistency: A young Chinese woman in her late 20s, sharp features, wet black hair, black suit soaked by
+        rain, determined eyes, vertical 9:16..'
+    audio_track:
+      dialogue: []
+      sfx:
+      - heavy rain
+      - thunder
+      music: tense, low strings
+    source_ref:
+      chapter_id: ch001
+      chapter_title: 第一章 雨夜封口费
+      source_excerpt: 暴雨把海城金融街冲成一片白雾。许听澜抱着文件袋站在盛曜集团楼下，身上的黑色西装已经湿透。
+  - shot_id: e1s3
+    duration_seconds: 4.0
+    purpose: conflict_escalation
+    characters:
+    - char_xu_mingwei
+    - char_xutinglan
+    visual_track:
+      framing: over_the_shoulder
+      camera_movement: static
+      visual_notes_zh: 许明薇捧着花束，温柔笑着说话
+      video_prompt: 'Over-the-shoulder shot from behind Xu Tinglan, showing Xu Mingwei in white dress holding a bouquet, smiling
+        sweetly, rain in background, vertical 9:16. Character consistency: A young Chinese woman in white designer dress,
+        sweet smile but cold eyes, holding bouquet, vertical 9:16.; A young Chinese woman in her late 20s, sharp features,
+        wet black hair, black suit soaked by rain, determined eyes, vertical 9:16..'
+    audio_track:
+      dialogue:
+      - speaker: 许明薇
+        text: 姐姐，项目泄密这种事，顾家总要给董事会一个交代。
+        tts_emotion: sweet
+      sfx:
+      - rain
+      music: ''
+    source_ref:
+      chapter_id: ch001
+      chapter_title: 第一章 雨夜封口费
+      source_excerpt: 许明薇穿着高定白裙，手里捧着刚官宣的订婚花束。她看着许听澜，笑得温柔：“姐姐，项目泄密这种事，顾家总要给董事会一个交代。”
+  - shot_id: e1s4
+    duration_seconds: 4.0
+    purpose: emotional_pressure
+    characters:
+    - char_xutinglan
+    - char_gu_chengyan
+    visual_track:
+      framing: close_up
+      camera_movement: push in
+      visual_notes_zh: 许听澜攥紧文件袋，顾承言递出支票
+      video_prompt: 'Close-up of a woman''s hand gripping a wet file bag, a man''s hand holding a check, rain drops on the
+        check, vertical 9:16, dramatic lighting. Character consistency: A young Chinese woman in her late 20s, sharp features,
+        wet black hair, black suit soaked by rain, determined eyes, vertical 9:16.; A handsome Chinese man in his early 30s,
+        tailored black suit, cold eyes, holding a black umbrella, vertical 9:16..'
+    audio_track:
+      dialogue:
+      - speaker: 许听澜
+        text: 那份底稿不是我传出去的。顾承言，你知道我昨晚一直在补风控模型。
+        tts_emotion: desperate
+      - speaker: 顾承言
+        text: 五百万，离开海城。别再查盛曜并购案。
+        tts_emotion: cold
+      sfx:
+      - rain
+      music: ''
+    source_ref:
+      chapter_id: ch001
+      chapter_title: 第一章 雨夜封口费
+      source_excerpt: 许听澜攥紧文件袋：“那份底稿不是我传出去的。顾承言，你知道我昨晚一直在补风控模型。”顾承言没有看她，只把一张支票夹在指间，递到她面前：“五百万，离开海城。别再查盛曜并购案。”
+  - shot_id: e1s5
+    duration_seconds: 3.0
+    purpose: emotional_pressure
+    characters:
+    - char_xutinglan
+    visual_track:
+      framing: close_up
+      camera_movement: static
+      visual_notes_zh: 许听澜盯着支票，冷笑
+      video_prompt: 'close up shot, static, the character is standing, holding a visible prop, pointing or looking at evidence,
+        visible facial expression, cinematic lighting, vertical 9:16. Close-up of a woman''s face, rain on her face, a bitter
+        smile forming, eyes fixed on something off-screen, vertical 9:16, moody lighting. Character consistency: A young Chinese
+        woman in her late 20s, sharp features, wet black hair, black suit soaked by rain, determined eyes, vertical 9:16..'
+    audio_track:
+      dialogue:
+      - speaker: 许听澜
+        text: 原来不是让我背锅，是让我闭嘴。
+        tts_emotion: bitter
+      sfx:
+      - rain
+      music: ''
+    source_ref:
+      chapter_id: ch001
+      chapter_title: 第一章 雨夜封口费
+      source_excerpt: 雨水顺着许听澜的睫毛往下掉。她盯着那张支票，忽然笑了一声：“原来不是让我背锅，是让我闭嘴。”
+  - shot_id: e1s6
+    duration_seconds: 3.0
+    purpose: reversal
+    characters:
+    - char_xutinglan
+    visual_track:
+      framing: insert_shot
+      camera_movement: static
+      visual_notes_zh: 支票被撕成两半，碎纸落在皮鞋上
+      video_prompt: 'Insert shot of hands tearing a check in half, pieces falling onto wet leather shoes, rain splashing,
+        vertical 9:16, slow motion. Character consistency: A young Chinese woman in her late 20s, sharp features, wet black
+        hair, black suit soaked by rain, determined eyes, vertical 9:16..'
+    audio_track:
+      dialogue: []
+      sfx:
+      - paper tearing
+      - rain
+      music: sharp sting
+    source_ref:
+      chapter_id: ch001
+      chapter_title: 第一章 雨夜封口费
+      source_excerpt: 下一秒，许听澜把支票撕成两半，碎纸被雨水打在顾承言的皮鞋上。
+  - shot_id: e1s7
+    duration_seconds: 5.0
+    purpose: conflict_escalation
+    characters:
+    - char_xutinglan
+    - char_gu_chengyan
+    visual_track:
+      framing: medium_shot
+      camera_movement: static
+      visual_notes_zh: 许听澜举起文件袋，大声质问
+      video_prompt: 'Medium shot of a woman holding up a file bag in the rain, facing a man in suit, rain pouring, city street
+        background, vertical 9:16, dramatic lighting. Character consistency: A young Chinese woman in her late 20s, sharp
+        features, wet black hair, black suit soaked by rain, determined eyes, vertical 9:16.; A handsome Chinese man in his
+        early 30s, tailored black suit, cold eyes, holding a black umbrella, vertical 9:16..'
+    audio_track:
+      dialogue:
+      - speaker: 许听澜
+        text: 你们怕我查到什么？怕查到盛曜收购顾氏债务之前，顾家已经把员工养老金挪进了空壳公司？
+        tts_emotion: angry
+      sfx:
+      - rain
+      music: tension rising
+    source_ref:
+      chapter_id: ch001
+      chapter_title: 第一章 雨夜封口费
+      source_excerpt: 她举起文件袋，声音穿过雨声：“你们怕我查到什么？怕查到盛曜收购顾氏债务之前，顾家已经把员工养老金挪进了空壳公司？”
+  - shot_id: e1s8
+    duration_seconds: 3.0
+    purpose: emotional_pressure
+    characters:
+    - char_gu_chengyan
+    visual_track:
+      framing: close_up
+      camera_movement: push in
+      visual_notes_zh: 顾承言瞳孔收缩，震惊
+      video_prompt: 'Close-up of a man''s face, eyes widening in shock, rain drops on his face, vertical 9:16, dramatic lighting.
+        Character consistency: A handsome Chinese man in his early 30s, tailored black suit, cold eyes, holding a black umbrella,
+        vertical 9:16..'
+    audio_track:
+      dialogue: []
+      sfx:
+      - rain
+      - thunder
+      music: ''
+    source_ref:
+      chapter_id: ch001
+      chapter_title: 第一章 雨夜封口费
+      source_excerpt: 顾承言的瞳孔骤然一缩。
+  - shot_id: e1s9
+    duration_seconds: 4.0
+    purpose: transition
+    characters:
+    - char_xutinglan
+    - char_shen_yanbai
+    visual_track:
+      framing: wide_shot
+      camera_movement: static
+      visual_notes_zh: 黑色宾利停在路边，车窗降下，沈砚白出现
+      video_prompt: 'Wide shot of a black Bentley stopping on a rainy street, rear window lowering, a man''s face partially
+        visible inside, woman standing in rain, vertical 9:16, cinematic. Character consistency: A young Chinese woman in
+        her late 20s, sharp features, wet black hair, black suit soaked by rain, determined eyes, vertical 9:16.; A tall Chinese
+        man in his late 30s, sharp suit, calm and commanding presence, dark eyes, vertical 9:16..'
+    audio_track:
+      dialogue:
+      - speaker: 沈砚白
+        text: 许小姐，上车。你手里的东西，顾家买不起。
+        tts_emotion: calm
+      sfx:
+      - car engine
+      - rain
+      music: mysterious, low bass
+    source_ref:
+      chapter_id: ch001
+      chapter_title: 第一章 雨夜封口费
+      source_excerpt: 就在这时，一辆没有牌照的黑色宾利停在路边。车窗降下，男人低沉的声音响起：“许小姐，上车。你手里的东西，顾家买不起。”
+  - shot_id: e1s10
+    duration_seconds: 3.0
+    purpose: cliffhanger
+    characters:
+    - char_xutinglan
+    visual_track:
+      framing: close_up
+      camera_movement: static
+      visual_notes_zh: 许听澜犹豫后，拉开车门
+      video_prompt: 'Close-up of a woman''s hand reaching for a car door handle, rain on hand, determination in eyes, vertical
+        9:16, dramatic lighting. Character consistency: A young Chinese woman in her late 20s, sharp features, wet black hair,
+        black suit soaked by rain, determined eyes, vertical 9:16..'
+    audio_track:
+      dialogue: []
+      sfx:
+      - car door opening
+      - rain
+      music: cliffhanger sting
+    source_ref:
+      chapter_id: ch001
+      chapter_title: 第一章 雨夜封口费
+      source_excerpt: （许听澜上车，但原文未直接描述，改编自情境）
+- episode_number: 2
+  episode_title: 顶楼黑名单
+  source_chapter_id: ch002
+  hook_summary: 许听澜被沈砚白带入盛曜顶楼，面对顾承言和许明薇的栽赃，沈砚白却给她一个U盘。
+  emotional_curve:
+  - 紧张
+  - 被诬陷
+  - 反转
+  - 希望
+  cliffhanger: 屏幕弹出隐藏字段：操作人设备指纹，属于顾承言的私人电脑。
+  estimated_duration_seconds: 90.0
+  shots:
+  - shot_id: e2s1
+    duration_seconds: 4.0
+    purpose: opening_hook
+    characters:
+    - char_gu_chengyan
+    - char_shen_yanbai
+    visual_track:
+      framing: close_up
+      camera_movement: fast push-in
+      visual_notes_zh: 黄金三秒：直接切入当众羞辱、证据逼问或权力压迫，人物正面冲突先于环境铺垫。 原镜头：顾承言反对许听澜参会，沈砚白强势回应
+      video_prompt: 'close up shot, fast push-in, the character is standing, holding a visible prop, pointing or looking at
+        evidence, visible facial expression, cinematic lighting, vertical 9:16. Close-up shot, fast push-in camera, a public
+        confrontation erupts in the first three seconds, char_gu_chengyan, char_shen_yanbai face each other under harsh dramatic
+        lighting, one character points at evidence or blocks the other, shocked bystanders in the background, concrete gestures,
+        vertical 9:16, high-tension short drama style. Source action: Medium shot of two men facing each other in a conference
+        room, one angry, the other calm and seated, vertical 9:16, corporate atmosphere. Character consistency: A handsome
+        Chinese man in his early 30s, tailored black suit, cold eyes, holding a black umbrella, vertical 9:16.; A tall Chinese
+        man in his late 30s, sharp suit, calm and commanding presence, dark eyes, vertical 9:16..'
+    audio_track:
+      dialogue:
+      - speaker: 顾承言
+        text: 沈总，顾氏已经提交内部调查结论。她是泄密人，不能参加今天的债权会议。
+        tts_emotion: angry
+      - speaker: 沈砚白
+        text: 顾总是在教我，谁能进我的会议室？
+        tts_emotion: cold
+      sfx: []
+      music: tense strings
+    source_ref:
+      chapter_id: ch002
+      chapter_title: 第二章 顶楼黑名单
+      source_excerpt: 顾承言脸色难看到极点：“沈总，顾氏已经提交内部调查结论。她是泄密人，不能参加今天的债权会议。”沈砚白坐到主位，抬眼看向顾承言：“顾总是在教我，谁能进我的会议室？”
+  - shot_id: e2s2
+    duration_seconds: 4.0
+    purpose: transition
+    characters:
+    - char_xutinglan
+    - char_shen_yanbai
+    visual_track:
+      framing: wide_shot
+      camera_movement: tracking
+      visual_notes_zh: 电梯门打开，顶楼会议室，顾承言也在
+      video_prompt: 'Wide shot of elevator doors opening to a high-end conference room, a man in suit (Gu Chengyan) standing
+        inside, surprised, vertical 9:16, corporate lighting. Character consistency: A young Chinese woman in her late 20s,
+        sharp features, wet black hair, black suit soaked by rain, determined eyes, vertical 9:16.; A tall Chinese man in
+        his late 30s, sharp suit, calm and commanding presence, dark eyes, vertical 9:16..'
+    audio_track:
+      dialogue: []
+      sfx:
+      - elevator ding
+      music: ''
+    source_ref:
+      chapter_id: ch002
+      chapter_title: 第二章 顶楼黑名单
+      source_excerpt: 电梯直达顶楼。门开的一瞬间，顾承言竟然也在会议室里。
+  - shot_id: e2s3
+    duration_seconds: 4.0
+    purpose: emotional_pressure
+    characters:
+    - char_xutinglan
+    - char_shen_yanbai
+    visual_track:
+      framing: medium_shot
+      camera_movement: static
+      visual_notes_zh: 宾利驶入地下车库，许听澜坐在后排，手指发抖
+      video_prompt: 'medium shot shot, static, the character is standing, holding a visible prop, pointing or looking at evidence,
+        visible facial expression, cinematic lighting, vertical 9:16. Medium shot inside a luxury car, a young woman in wet
+        suit sits in back seat, hands trembling, man in suit beside her, underground garage lighting, vertical 9:16. Character
+        consistency: A young Chinese woman in her late 20s, sharp features, wet black hair, black suit soaked by rain, determined
+        eyes, vertical 9:16.; A tall Chinese man in his late 30s, sharp suit, calm and commanding presence, dark eyes, vertical
+        9:16..'
+    audio_track:
+      dialogue:
+      - speaker: 沈砚白
+        text: 我找你，是因为你是唯一一个在底稿里留下异常标记的人。
+        tts_emotion: calm
+      sfx:
+      - car engine
+      - tires on concrete
+      music: tense, low hum
+    source_ref:
+      chapter_id: ch002
+      chapter_title: 第二章 顶楼黑名单
+      source_excerpt: 宾利驶入盛曜集团地下车库，许听澜坐在后排，指尖还在发抖。沈砚白说：“我找你，是因为你是唯一一个在底稿里留下异常标记的人。”
+  - shot_id: e2s4
+    duration_seconds: 4.0
+    purpose: emotional_pressure
+    characters:
+    - char_xu_mingwei
+    - char_xutinglan
+    visual_track:
+      framing: over_the_shoulder
+      camera_movement: static
+      visual_notes_zh: 许明薇推出报告，投影屏显示证据
+      video_prompt: 'Over-the-shoulder shot of a woman in white dress pushing a report on the table, projection screen showing
+        login logs, vertical 9:16, conference room. Character consistency: A young Chinese woman in white designer dress,
+        sweet smile but cold eyes, holding bouquet, vertical 9:16.; A young Chinese woman in her late 20s, sharp features,
+        wet black hair, black suit soaked by rain, determined eyes, vertical 9:16..'
+    audio_track:
+      dialogue:
+      - speaker: 许明薇
+        text: 沈总，这是许听澜违规导出模型的证据。她为了报复顾家，故意把并购报价泄给竞争方。
+        tts_emotion: accusing
+      sfx: []
+      music: ''
+    source_ref:
+      chapter_id: ch002
+      chapter_title: 第二章 顶楼黑名单
+      source_excerpt: 许明薇把一份纸质报告推到桌上：“沈总，这是许听澜违规导出模型的证据。她为了报复顾家，故意把并购报价泄给竞争方。”投影屏亮起，许听澜的账号登录记录、下载记录、外发邮件一页页闪过。
+  - shot_id: e2s5
+    duration_seconds: 3.0
+    purpose: emotional_pressure
+    characters:
+    - char_gu_chengyan
+    - char_xutinglan
+    visual_track:
+      framing: close_up
+      camera_movement: static
+      visual_notes_zh: 顾承言施舍般劝说许听澜认罪
+      video_prompt: 'Close-up of a man''s face with a condescending expression, speaking to someone off-screen, vertical 9:16,
+        harsh lighting. Character consistency: A handsome Chinese man in his early 30s, tailored black suit, cold eyes, holding
+        a black umbrella, vertical 9:16.; A young Chinese woman in her late 20s, sharp features, wet black hair, black suit
+        soaked by rain, determined eyes, vertical 9:16..'
+    audio_track:
+      dialogue:
+      - speaker: 顾承言
+        text: 听澜，承认吧。你现在认错，我还能保你不坐牢。
+        tts_emotion: condescending
+      sfx: []
+      music: ''
+    source_ref:
+      chapter_id: ch002
+      chapter_title: 第二章 顶楼黑名单
+      source_excerpt: 顾承言看着她，语气近乎施舍：“听澜，承认吧。你现在认错，我还能保你不坐牢。”
+  - shot_id: e2s6
+    duration_seconds: 4.0
+    purpose: reversal
+    characters:
+    - char_shen_yanbai
+    - char_xutinglan
+    visual_track:
+      framing: insert_shot
+      camera_movement: static
+      visual_notes_zh: 沈砚白将银色U盘推到许听澜面前
+      video_prompt: 'insert shot shot, static, the character is standing, holding a visible prop, pointing or looking at evidence,
+        visible facial expression, cinematic lighting, vertical 9:16. Insert shot of a silver USB drive being pushed across
+        a polished table towards a woman''s hand, vertical 9:16, dramatic lighting. Character consistency: A tall Chinese
+        man in his late 30s, sharp suit, calm and commanding presence, dark eyes, vertical 9:16.; A young Chinese woman in
+        her late 20s, sharp features, wet black hair, black suit soaked by rain, determined eyes, vertical 9:16..'
+    audio_track:
+      dialogue:
+      - speaker: 沈砚白
+        text: 许小姐，你昨晚标记的异常数据，我让人复算了一遍。现在，你来告诉他们，养老金去哪了。
+        tts_emotion: calm
+      sfx: []
+      music: hopeful, rising
+    source_ref:
+      chapter_id: ch002
+      chapter_title: 第二章 顶楼黑名单
+      source_excerpt: 沈砚白忽然把一枚银色 U 盘推到她面前：“许小姐，你昨晚标记的异常数据，我让人复算了一遍。现在，你来告诉他们，养老金去哪了。”
+  - shot_id: e2s7
+    duration_seconds: 3.0
+    purpose: conflict_escalation
+    characters:
+    - char_xu_mingwei
+    - char_shen_yanbai
+    visual_track:
+      framing: medium_shot
+      camera_movement: static
+      visual_notes_zh: 许明薇激动反对，沈砚白冷声回应
+      video_prompt: 'Medium shot of a woman standing up angrily, a man seated calmly, conference room, vertical 9:16. Character
+        consistency: A young Chinese woman in white designer dress, sweet smile but cold eyes, holding bouquet, vertical 9:16.;
+        A tall Chinese man in his late 30s, sharp suit, calm and commanding presence, dark eyes, vertical 9:16..'
+    audio_track:
+      dialogue:
+      - speaker: 许明薇
+        text: 沈总，她没有资格！
+        tts_emotion: angry
+      - speaker: 沈砚白
+        text: 从现在起，她是盛曜外聘风控顾问。谁有意见，可以离开。
+        tts_emotion: cold
+      sfx: []
+      music: ''
+    source_ref:
+      chapter_id: ch002
+      chapter_title: 第二章 顶楼黑名单
+      source_excerpt: 许明薇猛地抬头：“沈总，她没有资格！”沈砚白侧过脸，声音很轻：“从现在起，她是盛曜外聘风控顾问。谁有意见，可以离开。”
+  - shot_id: e2s8
+    duration_seconds: 4.0
+    purpose: emotional_pressure
+    characters:
+    - char_xutinglan
+    visual_track:
+      framing: close_up
+      camera_movement: push in
+      visual_notes_zh: 许听澜看着U盘，屏幕上的登录记录
+      video_prompt: 'Close-up of a woman''s face looking at a computer screen, reflection of data on her face, vertical 9:16,
+        intense lighting. Character consistency: A young Chinese woman in her late 20s, sharp features, wet black hair, black
+        suit soaked by rain, determined eyes, vertical 9:16..'
+    audio_track:
+      dialogue: []
+      sfx:
+      - keyboard clicking
+      music: suspenseful
+    source_ref:
+      chapter_id: ch002
+      chapter_title: 第二章 顶楼黑名单
+      source_excerpt: 许听澜看着那枚 U 盘，屏幕上的登录记录忽然弹出一行隐藏字段：操作人设备指纹，属于顾承言的私人电脑。
+  - shot_id: e2s9
+    duration_seconds: 3.0
+    purpose: reversal
+    characters:
+    - char_xutinglan
+    visual_track:
+      framing: extreme_close_up
+      camera_movement: static
+      visual_notes_zh: 屏幕上的隐藏字段放大显示
+      video_prompt: 'Extreme close-up of a computer screen showing text: ''设备指纹: 顾承言私人电脑'', vertical 9:16, high contrast.
+        Character consistency: A young Chinese woman in her late 20s, sharp features, wet black hair, black suit soaked by
+        rain, determined eyes, vertical 9:16..'
+    audio_track:
+      dialogue: []
+      sfx:
+      - beep
+      music: dramatic sting
+    source_ref:
+      chapter_id: ch002
+      chapter_title: 第二章 顶楼黑名单
+      source_excerpt: 操作人设备指纹，属于顾承言的私人电脑。
+  - shot_id: e2s10
+    duration_seconds: 3.0
+    purpose: cliffhanger
+    characters:
+    - char_gu_chengyan
+    visual_track:
+      framing: close_up
+      camera_movement: push in
+      visual_notes_zh: 顾承言脸色发白，震惊
+      video_prompt: 'Close-up of a man''s face turning pale, eyes wide with shock, vertical 9:16, dramatic lighting. Character
+        consistency: A handsome Chinese man in his early 30s, tailored black suit, cold eyes, holding a black umbrella, vertical
+        9:16..'
+    audio_track:
+      dialogue: []
+      sfx:
+      - heartbeat sound
+      music: cliffhanger sting
+    source_ref:
+      chapter_id: ch002
+      chapter_title: 第二章 顶楼黑名单
+      source_excerpt: （顾承言的反应，原文未直接描述，改编自情境）
+- episode_number: 3
+  episode_title: 白裙背后的账号
+  source_chapter_id: ch003
+  hook_summary: 许听澜揭露许明薇是白桥咨询实际控制人，但收到匿名短信警告沈砚白才是幕后黑手。
+  emotional_curve:
+  - 紧张
+  - 揭露
+  - 震惊
+  - 反转
+  cliffhanger: 匿名短信：别信沈砚白，三年前毁掉你父亲公司的并购案，签字人就是他。
+  estimated_duration_seconds: 90.0
+  shots:
+  - shot_id: e3s1
+    duration_seconds: 3.0
+    purpose: opening_hook
+    characters:
+    - char_xu_mingwei
+    - char_xutinglan
+    visual_track:
+      framing: close_up
+      camera_movement: fast push-in
+      visual_notes_zh: 黄金三秒：直接切入当众羞辱、证据逼问或权力压迫，人物正面冲突先于环境铺垫。 原镜头：许明薇立刻接话，指责许听澜陷害
+      video_prompt: 'Close-up shot, fast push-in camera, a public confrontation erupts in the first three seconds, char_xu_mingwei,
+        char_xutinglan face each other under harsh dramatic lighting, one character points at evidence or blocks the other,
+        shocked bystanders in the background, concrete gestures, vertical 9:16, high-tension short drama style. Source action:
+        Close-up of a woman''s face, fake concern, accusing tone, vertical 9:16. Character consistency: A young Chinese woman
+        in white designer dress, sweet smile but cold eyes, holding bouquet, vertical 9:16.; A young Chinese woman in her
+        late 20s, sharp features, wet black hair, black suit soaked by rain, determined eyes, vertical 9:16..'
+    audio_track:
+      dialogue:
+      - speaker: 许明薇
+        text: 姐姐，你为了洗白自己，连承言哥哥都要陷害吗？
+        tts_emotion: accusing
+      sfx: []
+      music: ''
+    source_ref:
+      chapter_id: ch003
+      chapter_title: 第三章 白裙背后的账号
+      source_excerpt: 许明薇立刻接话：“姐姐，你为了洗白自己，连承言哥哥都要陷害吗？”
+  - shot_id: e3s2
+    duration_seconds: 4.0
+    purpose: emotional_pressure
+    characters:
+    - char_xutinglan
+    - char_gu_chengyan
+    visual_track:
+      framing: medium_shot
+      camera_movement: static
+      visual_notes_zh: 许听澜放大隐藏字段，顾承言脸色发白
+      video_prompt: 'Medium shot of a woman at a computer, a man standing behind her looking shocked, conference room, vertical
+        9:16. Character consistency: A young Chinese woman in her late 20s, sharp features, wet black hair, black suit soaked
+        by rain, determined eyes, vertical 9:16.; A handsome Chinese man in his early 30s, tailored black suit, cold eyes,
+        holding a black umbrella, vertical 9:16..'
+    audio_track:
+      dialogue:
+      - speaker: 顾承言
+        text: 这只是设备被盗用，不能证明是我。
+        tts_emotion: defensive
+      sfx: []
+      music: tense
+    source_ref:
+      chapter_id: ch003
+      chapter_title: 第三章 白裙背后的账号
+      source_excerpt: 许听澜把隐藏字段放大，顾承言的脸色一寸寸发白。顾承言站起身：“这只是设备被盗用，不能证明是我。”
+  - shot_id: e3s3
+    duration_seconds: 4.0
+    purpose: emotional_pressure
+    characters:
+    - char_xutinglan
+    visual_track:
+      framing: insert_shot
+      camera_movement: static
+      visual_notes_zh: 许听澜打开第二个文件夹，显示资金流水
+      video_prompt: 'Insert shot of a computer screen showing financial transactions, many lines of data, vertical 9:16. Character
+        consistency: A young Chinese woman in her late 20s, sharp features, wet black hair, black suit soaked by rain, determined
+        eyes, vertical 9:16..'
+    audio_track:
+      dialogue: []
+      sfx:
+      - mouse click
+      music: suspenseful
+    source_ref:
+      chapter_id: ch003
+      chapter_title: 第三章 白裙背后的账号
+      source_excerpt: 她打开第二个文件夹，里面是几百条资金流水。顾氏员工养老金被分拆成三十七笔，绕过监管账户，最终汇入一家名叫“白桥咨询”的公司。
+  - shot_id: e3s4
+    duration_seconds: 3.0
+    purpose: reversal
+    characters:
+    - char_shen_yanbai
+    - char_xutinglan
+    visual_track:
+      framing: medium_shot
+      camera_movement: static
+      visual_notes_zh: 沈砚白问实际控制人，许听澜按下回车
+      video_prompt: 'Medium shot of a man asking a question, a woman pressing a key on keyboard, vertical 9:16. Character
+        consistency: A tall Chinese man in his late 30s, sharp suit, calm and commanding presence, dark eyes, vertical 9:16.;
+        A young Chinese woman in her late 20s, sharp features, wet black hair, black suit soaked by rain, determined eyes,
+        vertical 9:16..'
+    audio_track:
+      dialogue:
+      - speaker: 沈砚白
+        text: 白桥咨询的实际控制人是谁？
+        tts_emotion: calm
+      sfx:
+      - keyboard click
+      music: ''
+    source_ref:
+      chapter_id: ch003
+      chapter_title: 第三章 白裙背后的账号
+      source_excerpt: 沈砚白淡声问：“白桥咨询的实际控制人是谁？”许听澜按下回车。
+  - shot_id: e3s5
+    duration_seconds: 4.0
+    purpose: payoff
+    characters:
+    - char_xu_mingwei
+    visual_track:
+      framing: extreme_close_up
+      camera_movement: static
+      visual_notes_zh: 屏幕显示最终受益人：许明薇
+      video_prompt: 'Extreme close-up of a computer screen showing ''最终受益人: 许明薇'', vertical 9:16, high contrast. Character
+        consistency: A young Chinese woman in white designer dress, sweet smile but cold eyes, holding bouquet, vertical 9:16..'
+    audio_track:
+      dialogue: []
+      sfx:
+      - dramatic beep
+      music: dramatic sting
+    source_ref:
+      chapter_id: ch003
+      chapter_title: 第三章 白裙背后的账号
+      source_excerpt: 屏幕跳出工商穿透图，最终受益人一栏，清清楚楚写着许明薇。
+  - shot_id: e3s6
+    duration_seconds: 4.0
+    purpose: emotional_pressure
+    characters:
+    - char_xu_mingwei
+    visual_track:
+      framing: medium_shot
+      camera_movement: static
+      visual_notes_zh: 许明薇咖啡杯砸在桌上，白裙被溅
+      video_prompt: 'Medium shot of a woman in white dress, coffee cup falling, brown liquid splashing on her dress, vertical
+        9:16. Character consistency: A young Chinese woman in white designer dress, sweet smile but cold eyes, holding bouquet,
+        vertical 9:16..'
+    audio_track:
+      dialogue:
+      - speaker: 许明薇
+        text: 这是假的！
+        tts_emotion: hysterical
+      sfx:
+      - cup hitting table
+      - liquid splash
+      music: ''
+    source_ref:
+      chapter_id: ch003
+      chapter_title: 第三章 白裙背后的账号
+      source_excerpt: 许明薇手里的咖啡杯砸在桌上，褐色液体溅上她的白裙。她的温柔表情终于裂开：“这是假的！”
+  - shot_id: e3s7
+    duration_seconds: 3.0
+    purpose: emotional_pressure
+    characters:
+    - char_gu_chengyan
+    visual_track:
+      framing: close_up
+      camera_movement: static
+      visual_notes_zh: 顾承言后退半步，眼神怀疑
+      video_prompt: 'Close-up of a man''s face, stepping back, eyes showing doubt, vertical 9:16. Character consistency: A
+        handsome Chinese man in his early 30s, tailored black suit, cold eyes, holding a black umbrella, vertical 9:16..'
+    audio_track:
+      dialogue: []
+      sfx: []
+      music: suspenseful
+    source_ref:
+      chapter_id: ch003
+      chapter_title: 第三章 白裙背后的账号
+      source_excerpt: 顾承言下意识后退半步。他看向许明薇的眼神里，第一次出现了怀疑。
+  - shot_id: e3s8
+    duration_seconds: 5.0
+    purpose: payoff
+    characters:
+    - char_xutinglan
+    - char_shen_yanbai
+    visual_track:
+      framing: medium_shot
+      camera_movement: static
+      visual_notes_zh: 许听澜揭露两人合谋，沈砚白展示经侦通话
+      video_prompt: 'Medium shot of a woman speaking accusingly, a man holding up a phone showing ''海城经侦'' on screen, vertical
+        9:16. Character consistency: A young Chinese woman in her late 20s, sharp features, wet black hair, black suit soaked
+        by rain, determined eyes, vertical 9:16.; A tall Chinese man in his late 30s, sharp suit, calm and commanding presence,
+        dark eyes, vertical 9:16..'
+    audio_track:
+      dialogue:
+      - speaker: 许听澜
+        text: 你们一个负责拿我账号栽赃，一个负责接收赃款。订婚宴选在今天，是怕事情败露前顾氏债务先被盛曜锁死。
+        tts_emotion: cold
+      - speaker: 沈砚白
+        text: （电话中）沈先生，白桥咨询的冻结手续已经完成。
+        tts_emotion: neutral
+      sfx:
+      - phone voice
+      music: triumphant
+    source_ref:
+      chapter_id: ch003
+      chapter_title: 第三章 白裙背后的账号
+      source_excerpt: 许听澜盯着他们：“你们一个负责拿我账号栽赃，一个负责接收赃款。订婚宴选在今天，是怕事情败露前顾氏债务先被盛曜锁死。”沈砚白把手机放到桌上，通话界面显示“海城经侦”。电话那头传来声音：“沈先生，白桥咨询的冻结手续已经完成。”
+  - shot_id: e3s9
+    duration_seconds: 3.0
+    purpose: transition
+    characters:
+    - char_xutinglan
+    visual_track:
+      framing: close_up
+      camera_movement: static
+      visual_notes_zh: 许听澜手机震动，收到匿名短信
+      video_prompt: 'Close-up of a woman''s hand holding a phone, screen showing an anonymous text message, vertical 9:16.
+        Character consistency: A young Chinese woman in her late 20s, sharp features, wet black hair, black suit soaked by
+        rain, determined eyes, vertical 9:16..'
+    audio_track:
+      dialogue: []
+      sfx:
+      - phone vibration
+      music: ominous
+    source_ref:
+      chapter_id: ch003
+      chapter_title: 第三章 白裙背后的账号
+      source_excerpt: 许听澜的手机忽然震动。匿名短信只有一行字：别信沈砚白，三年前毁掉你父亲公司的并购案，签字人就是他。
+  - shot_id: e3s10
+    duration_seconds: 4.0
+    purpose: cliffhanger
+    characters:
+    - char_xutinglan
+    - char_shen_yanbai
+    visual_track:
+      framing: over_the_shoulder
+      camera_movement: static
+      visual_notes_zh: 许听澜抬头看向沈砚白，眼神震惊
+      video_prompt: 'Over-the-shoulder shot from behind Xu Tinglan, looking at Shen Yanbai who is calm, her expression turning
+        to shock, vertical 9:16. Character consistency: A young Chinese woman in her late 20s, sharp features, wet black hair,
+        black suit soaked by rain, determined eyes, vertical 9:16.; A tall Chinese man in his late 30s, sharp suit, calm and
+        commanding presence, dark eyes, vertical 9:16..'
+    audio_track:
+      dialogue: []
+      sfx:
+      - ominous drone
+      music: cliffhanger sting
+    source_ref:
+      chapter_id: ch003
+      chapter_title: 第三章 白裙背后的账号
+      source_excerpt: （许听澜的反应，改编自情境）
+source_map:
+- map_id: map_ch001
+  target_path: episodes[0].shots[0-9]
+  chapter_id: ch001
+  chapter_title: 第一章 雨夜封口费
+  source_excerpt: 暴雨把海城金融街冲成一片白雾。许听澜抱着文件袋站在盛曜集团楼下...
+  adaptation_note: 将心理描写转化为视觉动作和对话，保留关键冲突和反转。
+- map_id: map_ch002
+  target_path: episodes[1].shots[0-9]
+  chapter_id: ch002
+  chapter_title: 第二章 顶楼黑名单
+  source_excerpt: 宾利驶入盛曜集团地下车库，许听澜坐在后排，指尖还在发抖。
+  adaptation_note: 保留证据展示和反转，增加设备指纹的视觉呈现。
+- map_id: map_ch003
+  target_path: episodes[2].shots[0-9]
+  chapter_id: ch003
+  chapter_title: 第三章 白裙背后的账号
+  source_excerpt: 会议室里的空气像被抽空。许听澜把隐藏字段放大...
+  adaptation_note: 保留揭露和匿名短信的悬念，强化结尾反转。
+production_notes:
+- 每集开场前3秒必须抓住观众，使用强冲突或悬念。
+- 注意竖屏构图，人物面部特写和关键道具特写交替使用。
+- 音效和音乐要配合情绪曲线，在反转和悬念处使用戏剧性音效。
+- 演员表演要外化内心活动，避免冗长独白。
+quality_report:
+  input_chapter_count: 3
+  total_episodes: 3
+  total_shots: 30
+  schema_valid: true
+  warnings:
+  - provenance:episodes[0].shots[9].source_ref - source_ref 不是稳定原文片段，可能是模型补写或情境推断。
+  - provenance:episodes[1].shots[9].source_ref - source_ref 不是稳定原文片段，可能是模型补写或情境推断。
+  - provenance:episodes[2].shots[9].source_ref - source_ref 不是稳定原文片段，可能是模型补写或情境推断。
+  overall_score: 0.95
+  episode_scores:
+  - episode_number: 1
+    hook_score: 1.0
+    cliffhanger_score: 0.85
+    power_shift_score: 1.0
+    visual_executability_score: 0.95
+    continuity_score: 1.0
+    provenance_score: 0.9
+    overall_score: 0.95
+    passed: true
+    cliffhanger_options:
+    - 身份曝光型：char_xutinglan 刚要离开，屏幕弹出一份能证明真实身份的文件，所有人同时噤声。
+    - 危机降临型：沈砚白说：你手里的东西，顾家买不起。 下一秒，电话那头传来警方/医院/董事会的紧急通告。
+    - 反派反扑型：沈砚白说：你手里的东西，顾家买不起。 镜头切到反派冷笑，他手里还有一份足以反咬主角的证据。
+  - episode_number: 2
+    hook_score: 1.0
+    cliffhanger_score: 0.85
+    power_shift_score: 1.0
+    visual_executability_score: 0.95
+    continuity_score: 1.0
+    provenance_score: 0.9
+    overall_score: 0.95
+    passed: true
+    cliffhanger_options:
+    - 身份曝光型：char_gu_chengyan 刚要离开，屏幕弹出一份能证明真实身份的文件，所有人同时噤声。
+    - 危机降临型：屏幕弹出隐藏字段：操作人设备指纹，属于顾承言的私人电脑。 下一秒，电话那头传来警方/医院/董事会的紧急通告。
+    - 反派反扑型：屏幕弹出隐藏字段：操作人设备指纹，属于顾承言的私人电脑。 镜头切到反派冷笑，他手里还有一份足以反咬主角的证据。
+  - episode_number: 3
+    hook_score: 1.0
+    cliffhanger_score: 0.85
+    power_shift_score: 1.0
+    visual_executability_score: 0.95
+    continuity_score: 1.0
+    provenance_score: 0.9
+    overall_score: 0.95
+    passed: true
+    cliffhanger_options:
+    - 身份曝光型：char_xutinglan 刚要离开，屏幕弹出一份能证明真实身份的文件，所有人同时噤声。
+    - 危机降临型：匿名短信：别信沈砚白，三年前毁掉你父亲公司的并购案，签字人就是他。 下一秒，电话那头传来警方/医院/董事会的紧急通告。
+    - 反派反扑型：匿名短信：别信沈砚白，三年前毁掉你父亲公司的并购案，签字人就是他。 镜头切到反派冷笑，他手里还有一份足以反咬主角的证据。
+  badcases:
+  - metric: provenance
+    severity: medium
+    target_path: episodes[0].shots[9].source_ref
+    reason: source_ref 不是稳定原文片段，可能是模型补写或情境推断。
+    root_cause: 为了补足镜头，模型新增了原文没有直接提供的动作。
+    repair_suggestion: 用同章真实原文片段替换 source_excerpt，或在 adaptation_note 中显式标注改编逻辑。
+    source_excerpt: （许听澜上车，但原文未直接描述，改编自情境）
+  - metric: provenance
+    severity: medium
+    target_path: episodes[1].shots[9].source_ref
+    reason: source_ref 不是稳定原文片段，可能是模型补写或情境推断。
+    root_cause: 为了补足镜头，模型新增了原文没有直接提供的动作。
+    repair_suggestion: 用同章真实原文片段替换 source_excerpt，或在 adaptation_note 中显式标注改编逻辑。
+    source_excerpt: （顾承言的反应，原文未直接描述，改编自情境）
+  - metric: provenance
+    severity: medium
+    target_path: episodes[2].shots[9].source_ref
+    reason: source_ref 不是稳定原文片段，可能是模型补写或情境推断。
+    root_cause: 为了补足镜头，模型新增了原文没有直接提供的动作。
+    repair_suggestion: 用同章真实原文片段替换 source_excerpt，或在 adaptation_note 中显式标注改编逻辑。
+    source_excerpt: （许听澜的反应，改编自情境）
+  root_causes:
+  - 为了补足镜头，模型新增了原文没有直接提供的动作。
+  repair_suggestions:
+  - 用同章真实原文片段替换 source_excerpt，或在 adaptation_note 中显式标注改编逻辑。

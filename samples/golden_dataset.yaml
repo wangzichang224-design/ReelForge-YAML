@@ -1,0 +1,26 @@
+datasets:
+  - id: shadow_contract
+    title: 影子合约
+    input: samples/eval_novel_shadow_contract_3ch.txt
+    raw_output: samples/deepseek_shadow_contract_3ch_output.yaml
+    optimized_output: samples/deepseek_shadow_contract_3ch_optimized.yaml
+    target:
+      genre: 都市商战 / 复仇反转
+      expected_chapters: 3
+      expected_episodes: 3
+      expected_shots: 30
+      must_have:
+        - 首镜头直接出现对峙、羞辱、证据冲突或言语压迫
+        - 每集至少一次 power shift
+        - 每集末尾必须是 cliffhanger
+        - video_prompt 必须可被摄影机执行
+  - id: quiet_transition
+    title: 空办公室
+    input: samples/eval_novel_quiet_transition_3ch.txt
+    target:
+      genre: 创业现实 / 平淡戏剧化
+      expected_chapters: 3
+      must_have:
+        - 把内心独白转成动作、道具、屏幕信息和对话
+        - 把沉默群聊、录音、账单等低冲突材料改造成短剧卡点
+        - 避免抽象文学 video_prompt

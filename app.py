@@ -32,13 +32,16 @@ def main() -> None:
     st.caption("网文转竖屏短剧的结构化改编工作台｜章节 → 分集 → 镜头 → YAML → AI 视频友好提示词")
 
     settings = _render_sidebar()
-    input_tab, generate_tab, editor_tab, export_tab = st.tabs(["输入区", "生成区", "编辑区", "导出区"])
+    input_tab, generate_tab, eval_tab, editor_tab, export_tab = st.tabs(["输入区", "生成区", "测评与优化", "编辑区", "导出区"])
 
     with input_tab:
         _render_input_tab()
 
     with generate_tab:
         _render_generate_tab(settings)
+
+    with eval_tab:
+        _render_eval_tab()
 
     with editor_tab:
         _render_editor_tab()
@@ -83,6 +86,17 @@ def _render_sidebar() -> dict:
         step=1000,
         disabled=use_offline_demo,
     )
+    st.sidebar.divider()
+    st.sidebar.subheader("评测闭环")
+    enable_scratchpad = st.sidebar.checkbox("启用全局视觉黑板", value=True)
+    enable_critic_loop = st.sidebar.checkbox("启用 Critic 纠偏", value=False)
+    max_critic_rounds = st.sidebar.slider("最多纠偏轮数", 1, 2, 2, disabled=not enable_critic_loop)
+    use_llm_critic = st.sidebar.checkbox(
+        "使用模型专家评审",
+        value=False,
+        disabled=use_offline_demo or not enable_critic_loop,
+        help="关闭时使用本地硬规则评测；开启后会额外调用模型生成文字评审。",
+    )
 
     return {
         "title": title,
@@ -98,6 +112,10 @@ def _render_sidebar() -> dict:
             max_tokens=int(max_tokens),
             use_offline_demo=use_offline_demo,
         ),
+        "enable_scratchpad": enable_scratchpad,
+        "enable_critic_loop": enable_critic_loop,
+        "max_critic_rounds": max_critic_rounds,
+        "use_llm_critic": use_llm_critic,
     }
 
 
@@ -147,6 +165,10 @@ def _render_generate_tab(settings: dict) -> None:
                 target_style=settings["target_style"],
                 shots_per_episode=settings["shots_per_episode"],
                 llm_config=settings["llm_config"],
+                enable_scratchpad=settings["enable_scratchpad"],
+                enable_critic_loop=settings["enable_critic_loop"],
+                max_critic_rounds=settings["max_critic_rounds"],
+                use_llm_critic=settings["use_llm_critic"],
             )
             result = convert_novel_text(
                 st.session_state["novel_text"],
@@ -164,6 +186,83 @@ def _render_generate_tab(settings: dict) -> None:
 
     if st.session_state.get("document"):
         _render_document_preview(st.session_state["document"])
+
+
+def _render_eval_tab() -> None:
+    st.subheader("测评与 Badcase 优化")
+    document = st.session_state.get("document")
+    if not document:
+        st.info("请先生成 YAML；生成后这里会展示 hook、cliffhanger、power shift、视觉可执行性、连续性和来源追溯评分。")
+        return
+    report = document.quality_report
+    if not report:
+        st.warning("当前文档没有 quality_report，请重新生成或校验 YAML。")
+        return
+
+    score = report.overall_score if report.overall_score is not None else 0
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric("综合分", f"{score:.2f}")
+    c2.metric("Badcases", len(report.badcases))
+    c3.metric("总镜头", report.total_shots)
+    c4.metric("结构校验", "通过" if report.schema_valid else "失败")
+
+    if report.episode_scores:
+        st.markdown("**分集指标**")
+        st.dataframe(
+            [
+                {
+                    "EP": item.episode_number,
+                    "Hook": item.hook_score,
+                    "Cliffhanger": item.cliffhanger_score,
+                    "Power Shift": item.power_shift_score,
+                    "Visual": item.visual_executability_score,
+                    "Continuity": item.continuity_score,
+                    "Provenance": item.provenance_score,
+                    "Overall": item.overall_score,
+                    "Pass": item.passed,
+                }
+                for item in report.episode_scores
+            ],
+            use_container_width=True,
+        )
+
+    if report.badcases:
+        st.markdown("**Badcase 列表**")
+        for badcase in report.badcases:
+            with st.expander(f"{badcase.metric} · {badcase.severity} · {badcase.target_path}", expanded=badcase.severity == "high"):
+                st.write(f"原因：{badcase.reason}")
+                st.write(f"根因：{badcase.root_cause}")
+                st.write(f"建议：{badcase.repair_suggestion}")
+                if badcase.source_excerpt:
+                    st.caption(f"Source: {badcase.source_excerpt}")
+    else:
+        st.success("没有发现硬规则 badcase。")
+
+    st.markdown("**Cliffhanger 备选方案**")
+    for idx, score_item in enumerate(report.episode_scores):
+        if idx >= len(document.episodes) or not score_item.cliffhanger_options:
+            continue
+        episode = document.episodes[idx]
+        key = f"cliffhanger_option_{idx}"
+        choice = st.radio(
+            f"EP{episode.episode_number:02d} · {episode.episode_title}",
+            score_item.cliffhanger_options,
+            key=key,
+        )
+        if st.button(f"应用到 EP{episode.episode_number:02d}", key=f"apply_cliff_{idx}"):
+            document = _apply_cliffhanger_choice(document, idx, choice)
+            st.session_state["document"] = document
+            from shortdrama_yaml.evaluator import evaluate_document
+            from shortdrama_yaml.yaml_io import document_to_yaml
+
+            report = evaluate_document(document, visual_bible=document.visual_bible)
+            document = document.model_copy(update={"quality_report": report})
+            st.session_state["document"] = document
+            st.session_state["yaml_text"] = document_to_yaml(document)
+            st.session_state["yaml_editor"] = st.session_state["yaml_text"]
+            st.session_state["yaml_editor_widget"] = st.session_state["yaml_text"]
+            st.success("已应用 cliffhanger 备选，并重新生成 YAML。")
+            st.rerun()
 
 
 def _render_editor_tab() -> None:
@@ -260,6 +359,24 @@ def _render_document_preview(document) -> None:
                 )
 
 
+def _apply_cliffhanger_choice(document, episode_index: int, choice: str):
+    from shortdrama_yaml.yaml_io import document_to_yaml, yaml_to_document
+
+    data = document.model_dump(mode="json", exclude_none=True)
+    episode = data["episodes"][episode_index]
+    episode["cliffhanger"] = choice
+    last_shot = episode["shots"][-1]
+    last_shot["purpose"] = "cliffhanger"
+    last_shot["visual_track"]["visual_notes_zh"] = f"用户选择的结尾钩子：{choice}"
+    last_shot["visual_track"]["video_prompt"] = (
+        "Close-up shot, sudden cliffhanger reveal, the protagonist freezes while a shocking message or document appears, "
+        "dramatic lighting, fast push-in camera, vertical 9:16. "
+        f"Cliffhanger concept: {choice}"
+    )
+    yaml_text = document_to_yaml(document.__class__.model_validate(data))
+    return yaml_to_document(yaml_text)
+
+
 def _read_text(path: Path) -> str:
     if not path.exists():
         return ""
@@ -275,6 +392,8 @@ def _build_default_sample_yaml() -> str:
                 genre="都市逆袭",
                 tone="强冲突、快节奏、爽感反转",
                 llm_config=LLMConfig(use_offline_demo=True),
+                enable_scratchpad=True,
+                enable_critic_loop=True,
             ),
         )
         return result.yaml_text
