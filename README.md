@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/logo.svg" width="96" alt="ReelForge YAML logo" />
+</p>
+
 ![ReelForge YAML banner](assets/banner.svg)
 
 # ReelForge YAML
@@ -5,7 +9,7 @@
 **网文转竖屏短剧的结构化改编工作台。**  
 把 3 章以上小说自动转换为可编辑、可校验、可追溯的镜头级 YAML 剧本初稿，并为后续 AI 视频、TTS、音效和自动剪辑流水线预留接口。
 
-> Positioning: schema-first AI assisted adaptation, not blind end-to-end automation.
+> Schema-first AI-assisted adaptation, built for trusted human-in-the-loop short-drama production.
 
 ## Why ReelForge
 

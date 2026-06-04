@@ -1,21 +1,38 @@
 <svg width="1280" height="420" viewBox="0 0 1280 420" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1280" height="420" rx="32" fill="#0F172A"/>
-  <path d="M0 298C146 210 286 238 430 274C574 310 724 354 888 286C1052 218 1156 142 1280 168V420H0V298Z" fill="#0E7490" fill-opacity="0.42"/>
-  <path d="M0 330C178 242 336 274 506 318C676 362 818 390 1000 284C1110 220 1190 208 1280 232V420H0V330Z" fill="#F59E0B" fill-opacity="0.22"/>
-  <rect x="74" y="82" width="260" height="220" rx="30" fill="#F8FAFC"/>
-  <rect x="94" y="102" width="220" height="180" rx="18" fill="#111827"/>
-  <path d="M124 108V276" stroke="#F8FAFC" stroke-width="10" stroke-linecap="round" stroke-dasharray="12 17"/>
-  <path d="M284 108V276" stroke="#F8FAFC" stroke-width="10" stroke-linecap="round" stroke-dasharray="12 17"/>
-  <path d="M178 162L148 192L178 222" stroke="#38BDF8" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M230 162L260 192L230 222" stroke="#38BDF8" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M196 140L216 244" stroke="#F59E0B" stroke-width="16" stroke-linecap="round"/>
-  <text x="390" y="165" fill="#F8FAFC" font-family="Inter, Arial, sans-serif" font-size="68" font-weight="800">ReelForge YAML</text>
-  <text x="394" y="222" fill="#CBD5E1" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="500">AI-assisted web-novel to vertical short-drama scripts</text>
-  <text x="394" y="276" fill="#38BDF8" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">Novel chapters → Episodes → Shots → YAML → Video-ready prompts</text>
-  <rect x="394" y="306" width="176" height="42" rx="21" fill="#F59E0B"/>
-  <text x="421" y="334" fill="#111827" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="800">Schema-first</text>
-  <rect x="590" y="306" width="178" height="42" rx="21" fill="#164E63"/>
-  <text x="620" y="334" fill="#E0F2FE" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="800">Source Map</text>
-  <rect x="788" y="306" width="184" height="42" rx="21" fill="#1E293B"/>
-  <text x="819" y="334" fill="#F8FAFC" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="800">DeepSeek-ready</text>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1280" y2="420" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8FAFC"/>
+      <stop offset="1" stop-color="#E0F2FE"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="88" y1="80" x2="340" y2="338" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#F59E0B"/>
+    </linearGradient>
+    <filter id="softShadow" x="42" y="42" width="376" height="376" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#0F172A" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+  <rect width="1280" height="420" rx="34" fill="url(#bg)"/>
+  <path d="M846 0H1280V420H706C812 354 873 268 884 188C895 108 875 44 846 0Z" fill="#0F172A"/>
+  <path d="M878 420H1280V170C1196 160 1126 184 1050 246C974 308 940 364 878 420Z" fill="#164E63"/>
+  <g filter="url(#softShadow)">
+    <rect x="76" y="66" width="316" height="316" rx="68" fill="#0F172A"/>
+    <rect x="101" y="91" width="266" height="266" rx="48" stroke="url(#accent)" stroke-width="10"/>
+    <path d="M146 130V318" stroke="#E2E8F0" stroke-width="12" stroke-linecap="round" stroke-dasharray="16 22"/>
+    <path d="M322 130V318" stroke="#E2E8F0" stroke-width="12" stroke-linecap="round" stroke-dasharray="16 22"/>
+    <path d="M216 178L176 224L216 270" stroke="#67E8F9" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M268 178L308 224L268 270" stroke="#67E8F9" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M235 164L253 288" stroke="#FBBF24" stroke-width="18" stroke-linecap="round"/>
+    <path d="M242 104L252 128L278 134L258 151L264 176L242 162L221 176L226 151L206 134L232 128L242 104Z" fill="#FBBF24"/>
+  </g>
+  <text x="456" y="150" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="66" font-weight="850">ReelForge YAML</text>
+  <text x="460" y="205" fill="#334155" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="520">Schema-first AI workbench for adapting web novels into vertical short-drama scripts.</text>
+  <text x="460" y="259" fill="#0E7490" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="760">Novel chapters → Episodes → Shots → YAML → Video-ready prompts</text>
+  <rect x="460" y="298" width="164" height="42" rx="21" fill="#0F172A"/>
+  <text x="491" y="326" fill="#F8FAFC" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="780">Schema-first</text>
+  <rect x="640" y="298" width="152" height="42" rx="21" fill="#CCFBF1"/>
+  <text x="670" y="326" fill="#115E59" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="780">Source Map</text>
+  <rect x="808" y="298" width="178" height="42" rx="21" fill="#FEF3C7"/>
+  <text x="835" y="326" fill="#92400E" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="780">DeepSeek-ready</text>
+  <text x="992" y="325" fill="#F8FAFC" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="760">Human-in-the-loop scripts</text>
 </svg>

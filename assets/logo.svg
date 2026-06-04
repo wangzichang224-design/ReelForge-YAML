@@ -1,13 +1,24 @@
 <svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="512" height="512" rx="96" fill="#111827"/>
-  <rect x="54" y="76" width="408" height="332" rx="42" fill="#F8FAFC"/>
-  <rect x="76" y="102" width="364" height="280" rx="28" fill="#111827"/>
-  <path d="M108 102V382" stroke="#F8FAFC" stroke-width="16" stroke-linecap="round" stroke-dasharray="18 24"/>
-  <path d="M404 102V382" stroke="#F8FAFC" stroke-width="16" stroke-linecap="round" stroke-dasharray="18 24"/>
-  <path d="M188 212L146 256L188 300" stroke="#38BDF8" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M324 212L366 256L324 300" stroke="#38BDF8" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M236 180L282 332" stroke="#F59E0B" stroke-width="24" stroke-linecap="round"/>
-  <path d="M262 94L280 132L322 138L292 168L299 210L262 190L225 210L232 168L202 138L244 132L262 94Z" fill="#F59E0B"/>
-  <path d="M158 438H354" stroke="#38BDF8" stroke-width="24" stroke-linecap="round"/>
-  <path d="M208 438C208 414 228 394 252 394H270C294 394 314 414 314 438" stroke="#F59E0B" stroke-width="18" stroke-linecap="round"/>
+  <defs>
+    <linearGradient id="mark" x1="118" y1="104" x2="396" y2="410" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#F59E0B"/>
+    </linearGradient>
+    <filter id="shadow" x="40" y="34" width="432" height="440" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#020617" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="104" fill="#F8FAFC"/>
+  <g filter="url(#shadow)">
+    <rect x="82" y="72" width="348" height="368" rx="76" fill="#0F172A"/>
+    <rect x="106" y="96" width="300" height="320" rx="56" stroke="url(#mark)" stroke-width="12"/>
+  </g>
+  <path d="M156 146V368" stroke="#E2E8F0" stroke-width="16" stroke-linecap="round" stroke-dasharray="20 28"/>
+  <path d="M356 146V368" stroke="#E2E8F0" stroke-width="16" stroke-linecap="round" stroke-dasharray="20 28"/>
+  <path d="M222 196L176 256L222 316" stroke="#67E8F9" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M290 196L336 256L290 316" stroke="#67E8F9" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M246 180L270 332" stroke="#FBBF24" stroke-width="22" stroke-linecap="round"/>
+  <path d="M256 104L267 132L297 138L274 158L281 188L256 172L231 188L238 158L215 138L245 132L256 104Z" fill="#FBBF24"/>
+  <circle cx="356" cy="386" r="10" fill="#22D3EE"/>
+  <circle cx="386" cy="354" r="6" fill="#F59E0B"/>
 </svg>
