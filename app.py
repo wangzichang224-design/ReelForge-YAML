@@ -217,6 +217,7 @@ def _render_eval_tab() -> None:
                     "Power Shift": item.power_shift_score,
                     "Visual": item.visual_executability_score,
                     "Continuity": item.continuity_score,
+                    "Dialogue": item.dialogue_language_score,
                     "Provenance": item.provenance_score,
                     "Overall": item.overall_score,
                     "Pass": item.passed,

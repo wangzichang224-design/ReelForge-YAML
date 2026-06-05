@@ -32,6 +32,7 @@ QualityMetric = Literal[
     "visual_executability",
     "continuity",
     "provenance",
+    "dialogue_language",
 ]
 
 
@@ -186,6 +187,7 @@ class EpisodeQualityScore(StrictModel):
     visual_executability_score: float = Field(ge=0, le=1)
     continuity_score: float = Field(ge=0, le=1)
     provenance_score: float = Field(ge=0, le=1)
+    dialogue_language_score: float = Field(default=1.0, ge=0, le=1)
     overall_score: float = Field(ge=0, le=1)
     passed: bool
     cliffhanger_options: list[str] = Field(default_factory=list)

@@ -132,6 +132,7 @@ def report_to_dict(report: QualityReport | None) -> dict[str, Any]:
                 "power_shift": score.power_shift_score,
                 "visual": score.visual_executability_score,
                 "continuity": score.continuity_score,
+                "dialogue_language": score.dialogue_language_score,
                 "passed": score.passed,
             }
             for score in report.episode_scores

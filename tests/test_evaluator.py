@@ -61,6 +61,46 @@ def test_visual_executability_rejects_abstract_prompt() -> None:
     assert any(badcase.metric == "visual_executability" for badcase in report.badcases)
 
 
+def test_dialogue_language_rejects_non_chinese_dialogue() -> None:
+    document = yaml_to_document(DEEPSEEK_SAMPLE.read_text(encoding="utf-8"))
+    data = document.model_dump(mode="json", exclude_none=True)
+    for shot in data["episodes"][0]["shots"]:
+        for line in shot["audio_track"]["dialogue"]:
+            line["text"] = "I will expose the truth now."
+    edited = ScriptDocument.model_validate(data)
+    report = evaluate_document(edited, input_chapter_count=3)
+    assert report.episode_scores[0].dialogue_language_score < 0.75
+    assert any(badcase.metric == "dialogue_language" for badcase in report.badcases)
+
+
+def test_ancient_costume_is_allowed_for_palace_visual_bible() -> None:
+    document = yaml_to_document(DEEPSEEK_SAMPLE.read_text(encoding="utf-8"))
+    document = apply_visual_bible(document)
+    assert document.visual_bible is not None
+
+    bible_data = document.visual_bible.model_dump(mode="json")
+    bible_data["global_style"] = "古风权谋，长安宫廷，palace intrigue, ancient costume visual style"
+    bible_data["characters"][0]["negative_drift_terms"] = ["ancient costume"]
+
+    data = document.model_dump(mode="json", exclude_none=True)
+    data["visual_bible"] = bible_data
+    first_character_id = data["visual_bible"]["characters"][0]["character_id"]
+    locked_trait = data["visual_bible"]["characters"][0]["locked_traits"][0]
+    for shot in data["episodes"][0]["shots"]:
+        shot["characters"] = [first_character_id]
+        shot["visual_track"]["video_prompt"] = (
+            f"Close-up shot, the character is standing in ancient costume, holding evidence in palace interior, "
+            f"cinematic lighting, vertical 9:16. Character consistency: {locked_trait}."
+        )
+    edited = ScriptDocument.model_validate(data)
+    report = evaluate_document(edited, input_chapter_count=3, visual_bible=edited.visual_bible)
+    assert not [
+        badcase
+        for badcase in report.badcases
+        if badcase.metric == "continuity" and "episodes[0]" in badcase.target_path
+    ]
+
+
 def test_power_shift_fails_without_reversal_or_payoff() -> None:
     document = yaml_to_document(DEEPSEEK_SAMPLE.read_text(encoding="utf-8"))
     data = document.model_dump(mode="json", exclude_none=True)

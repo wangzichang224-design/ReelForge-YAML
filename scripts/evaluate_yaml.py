@@ -59,13 +59,14 @@ def main() -> None:
     print(f"badcases={len(report.badcases)}")
     for score in report.episode_scores:
         print(
-            "EP{episode}: hook={hook:.2f} cliff={cliff:.2f} power={power:.2f} visual={visual:.2f} continuity={continuity:.2f} pass={passed}".format(
+            "EP{episode}: hook={hook:.2f} cliff={cliff:.2f} power={power:.2f} visual={visual:.2f} continuity={continuity:.2f} dialogue={dialogue:.2f} pass={passed}".format(
                 episode=score.episode_number,
                 hook=score.hook_score,
                 cliff=score.cliffhanger_score,
                 power=score.power_shift_score,
                 visual=score.visual_executability_score,
                 continuity=score.continuity_score,
+                dialogue=score.dialogue_language_score,
                 passed=score.passed,
             )
         )

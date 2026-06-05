@@ -256,11 +256,11 @@ Checked-in benchmark report:
 Current offline baseline:
 
 - samples = 5
-- raw_average_score = 0.883
-- optimized_average_score = 0.95
-- raw_badcases = 150
+- raw_average_score = 0.905
+- optimized_average_score = 0.923
+- raw_badcases = 75
 - optimized_badcases = 30
-- badcase_reduction_rate = 0.8
+- badcase_reduction_rate = 0.6
 
 ## Test
 
