@@ -24,3 +24,42 @@ datasets:
         - 把内心独白转成动作、道具、屏幕信息和对话
         - 把沉默群聊、录音、账单等低冲突材料改造成短剧卡点
         - 避免抽象文学 video_prompt
+  - id: palace_lantern
+    title: 长安灯影案
+    input: samples/eval_novel_palace_lantern_3ch.txt
+    target:
+      genre: 古风权谋 / 证据反转
+      expected_chapters: 3
+      expected_episodes: 3
+      expected_shots: 30
+      must_have:
+        - 古风服装、宫灯、午门、军械库等视觉资产必须稳定继承
+        - 首镜头必须直接进入谋害皇后、当众逼罪或证据冲突
+        - 每集必须发生一次权力翻转
+        - evaluator 不应把 ancient costume 固定判为外观漂移
+  - id: hospital_will
+    title: 病房里的继承书
+    input: samples/eval_novel_hospital_will_3ch.txt
+    target:
+      genre: 医疗家庭 / 遗嘱打脸
+      expected_chapters: 3
+      expected_episodes: 3
+      expected_shots: 30
+      must_have:
+        - 首镜头必须出现逼签、直播羞辱、病房对峙或遗嘱证据
+        - 录音笔、病历夹、针管、电子签名等道具要进入 video_prompt
+        - 每集尾镜头必须卡在遗嘱、身份或父亲醒来之前
+        - 中文台词必须保留家庭伦理短剧的压迫感
+  - id: midnight_refund
+    title: 凌晨三点的退款单
+    input: samples/eval_novel_midnight_refund_3ch.txt
+    target:
+      genre: 客服职场 / 低冲突悬疑
+      expected_chapters: 3
+      expected_episodes: 3
+      expected_shots: 30
+      must_have:
+        - 把内心犹豫转为屏幕、鼠标、录屏、监控和电话动作
+        - 首镜头不能只拍空办公室，必须出现退款异常或威胁信息
+        - 每集必须用订单备注、缓存录音、监控回放制造 cliffhanger
+        - 避免 inner thought、complex emotion 等抽象 video_prompt
