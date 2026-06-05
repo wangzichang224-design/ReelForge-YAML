@@ -20,8 +20,9 @@ def build_visual_bible(document: ScriptDocument) -> VisualBible:
     genre = document.series_metadata.genre
     tone = document.series_metadata.tone
     style = f"{genre}，{tone}，9:16 竖屏短剧，写实现代商业影像风格"
-    key_locations = _extract_locations(document)
-    key_props = _extract_props(document)
+    defaults = _style_defaults(f"{genre} {tone}")
+    key_locations = _merge_unique(defaults["locations"], _extract_locations(document))
+    key_props = _merge_unique(defaults["props"], _extract_props(document))
     assets = [
         VisualAsset(
             character_id=character.character_id,
@@ -29,13 +30,13 @@ def build_visual_bible(document: ScriptDocument) -> VisualBible:
             locked_traits=_extract_locked_traits(character.visual_consistency_prompt),
             wardrobe=_extract_wardrobe(character.visual_consistency_prompt),
             visual_prompt=character.visual_consistency_prompt,
-            negative_drift_terms=DEFAULT_NEGATIVE_DRIFT_TERMS,
+            negative_drift_terms=_negative_drift_terms(f"{genre} {tone}"),
         )
         for character in document.characters
     ]
     return VisualBible(
         global_style=style,
-        palette=["deep charcoal", "cold cyan", "warm amber", "rainy glass reflections"],
+        palette=defaults["palette"],
         key_locations=key_locations,
         key_props=key_props,
         characters=assets,
@@ -145,6 +146,49 @@ def _extract_props(document: ScriptDocument) -> list[str]:
                 if term in text:
                     props.add(term)
     return sorted(props)
+
+
+def _style_defaults(style_text: str) -> dict[str, list[str]]:
+    lowered = style_text.lower()
+    if any(term in lowered for term in ["古风", "宫", "权谋", "长安", "palace", "ancient"]):
+        return {
+            "palette": ["warm lantern gold", "imperial red", "ink black", "cold moonlight"],
+            "locations": ["宫灯宴", "午门", "掖庭", "军械库", "宫墙"],
+            "props": ["宫灯", "灯芯", "玉印", "军械库暗账", "认罪书"],
+        }
+    if any(term in lowered for term in ["医疗", "病房", "遗嘱", "hospital", "will"]):
+        return {
+            "palette": ["clinical white", "monitor green", "cold blue", "warning red"],
+            "locations": ["VIP 病房", "抢救室外", "护士站", "董事会视频会议"],
+            "props": ["录音笔", "病历夹", "针管", "药品登记平板", "遗嘱"],
+        }
+    if any(term in lowered for term in ["职场", "客服", "退款", "office", "refund", "warehouse"]):
+        return {
+            "palette": ["fluorescent white", "screen blue", "rainy glass gray", "warning red"],
+            "locations": ["客服工位", "会议室", "便利店监控屏", "仓库 7 号门"],
+            "props": ["退款单", "录屏文件", "耳机缓存", "监控回放", "审计日志"],
+        }
+    return {
+        "palette": ["deep charcoal", "cold cyan", "warm amber", "rainy glass reflections"],
+        "locations": [],
+        "props": [],
+    }
+
+
+def _negative_drift_terms(style_text: str) -> list[str]:
+    terms = list(DEFAULT_NEGATIVE_DRIFT_TERMS)
+    lowered = style_text.lower()
+    if any(term in lowered for term in ["古风", "宫", "权谋", "长安", "palace", "ancient"]):
+        terms = [term for term in terms if term != "ancient costume"]
+    return terms
+
+
+def _merge_unique(first: list[str], second: list[str]) -> list[str]:
+    output: list[str] = []
+    for item in [*first, *second]:
+        if item and item not in output:
+            output.append(item)
+    return output
 
 
 def _append_prompt(prompt: str, additions: list[str]) -> str:

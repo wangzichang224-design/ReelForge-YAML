@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from .critic import CriticResult, ScriptCritic
-from .evaluator import CONFLICT_TERMS, evaluate_document
+from .evaluator import ABSTRACT_TERMS, CONFLICT_TERMS, evaluate_document
 from .llm_client import LLMConfig, OpenAICompatibleJSONClient
 from .schema import Episode, ScriptDocument, Shot
 from .scratchpad import inject_visual_traits_into_prompts
@@ -81,7 +81,7 @@ def _rewrite_badcases(document: ScriptDocument, result: CriticResult) -> ScriptD
         updated = episode
         if episode_index in hook_failures:
             updated = _rewrite_opening_hook(updated)
-        updated = _rewrite_visual_prompts(updated, episode_index, visual_failures)
+        updated = _rewrite_visual_prompts(updated, episode_index, visual_failures, document)
         episodes.append(updated)
     return document.model_copy(update={"episodes": episodes})
 
@@ -165,23 +165,55 @@ def _rewrite_visual_prompts(
     episode: Episode,
     episode_index: int,
     visual_failures: set[tuple[int, int] | None],
+    document: ScriptDocument,
 ) -> Episode:
     shots = []
+    scene_hint = _scene_hint(document)
     for shot_index, shot in enumerate(episode.shots):
         if (episode_index, shot_index) in visual_failures:
             visual_track = shot.visual_track.model_copy(
                 update={
+                    "visual_notes_zh": (
+                        f"把抽象情绪改为可见动作：人物在{scene_hint}中站定，手持道具或证据，"
+                        "通过指向、阻拦、对视、屏幕信息或文件特写表现压力。"
+                    ),
                     "video_prompt": (
                         f"{shot.visual_track.framing.replace('_', ' ')} shot, {shot.visual_track.camera_movement}, "
+                        f"in {scene_hint}, "
                         "the character is standing, holding a visible prop, pointing or looking at evidence, "
                         "visible facial expression, cinematic lighting, vertical 9:16. "
-                        f"{shot.visual_track.video_prompt}"
+                        f"{_sanitize_abstract_prompt(shot.visual_track.video_prompt)}"
                     )
                 }
             )
             shot = shot.model_copy(update={"visual_track": visual_track})
         shots.append(shot)
     return episode.model_copy(update={"shots": shots})
+
+
+def _scene_hint(document: ScriptDocument) -> str:
+    if document.visual_bible:
+        if document.visual_bible.key_locations:
+            first_location = document.visual_bible.key_locations[0]
+            return f"a specific {first_location} scene interior"
+        style = document.visual_bible.global_style.lower()
+    else:
+        style = document.series_metadata.genre.lower()
+    if any(term in style for term in ["古风", "宫", "palace", "ancient"]):
+        return "a palace interior with lanterns and officials"
+    if any(term in style for term in ["医疗", "病房", "hospital"]):
+        return "a hospital ward interior with monitors and medical props"
+    if any(term in style for term in ["职场", "客服", "office", "refund"]):
+        return "a customer service office with computer screens"
+    return "a modern short drama interior"
+
+
+def _sanitize_abstract_prompt(prompt: str) -> str:
+    cleaned = prompt
+    for term in ABSTRACT_TERMS:
+        cleaned = cleaned.replace(term, "visible facial reaction")
+        cleaned = cleaned.replace(term.title(), "visible facial reaction")
+    return cleaned
 
 
 def _parse_shot_path(path: str) -> tuple[int, int] | None:

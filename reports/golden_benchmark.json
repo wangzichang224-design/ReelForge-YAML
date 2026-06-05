@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-06-05T07:50:27.441401+00:00",
+  "generated_at": "2026-06-05T07:56:51.429217+00:00",
   "dataset": "samples/golden_dataset.yaml",
   "mode": "offline_demo_raw_vs_scratchpad_critic",
   "summary": {
     "sample_count": 5,
     "raw_average_score": 0.905,
-    "optimized_average_score": 0.923,
+    "optimized_average_score": 0.944,
     "raw_badcases": 75,
-    "optimized_badcases": 30,
-    "badcase_reduction_rate": 0.6
+    "optimized_badcases": 0,
+    "badcase_reduction_rate": 1.0
   },
   "results": [
     {
@@ -62,21 +62,19 @@
         ]
       },
       "optimized": {
-        "overall_score": 0.923,
-        "badcase_count": 6,
+        "overall_score": 0.944,
+        "badcase_count": 0,
         "episodes": 3,
         "shots": 30,
         "schema_valid": true,
-        "root_causes": [
-          "文学描写没有充分转译为摄影机可捕捉的动作、构图、光影和道具。"
-        ],
+        "root_causes": [],
         "episode_scores": [
           {
             "episode": 1,
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.76,
+            "visual": 0.91,
             "continuity": 0.85,
             "dialogue_language": 1.0,
             "passed": true
@@ -86,7 +84,7 @@
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.76,
+            "visual": 0.91,
             "continuity": 0.85,
             "dialogue_language": 1.0,
             "passed": true
@@ -96,7 +94,7 @@
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.76,
+            "visual": 0.91,
             "continuity": 0.85,
             "dialogue_language": 1.0,
             "passed": true
@@ -161,21 +159,19 @@
         ]
       },
       "optimized": {
-        "overall_score": 0.923,
-        "badcase_count": 6,
+        "overall_score": 0.944,
+        "badcase_count": 0,
         "episodes": 3,
         "shots": 30,
         "schema_valid": true,
-        "root_causes": [
-          "文学描写没有充分转译为摄影机可捕捉的动作、构图、光影和道具。"
-        ],
+        "root_causes": [],
         "episode_scores": [
           {
             "episode": 1,
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.76,
+            "visual": 0.91,
             "continuity": 0.85,
             "dialogue_language": 1.0,
             "passed": true
@@ -185,7 +181,7 @@
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.76,
+            "visual": 0.91,
             "continuity": 0.85,
             "dialogue_language": 1.0,
             "passed": true
@@ -195,7 +191,7 @@
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.76,
+            "visual": 0.91,
             "continuity": 0.85,
             "dialogue_language": 1.0,
             "passed": true
@@ -259,21 +255,19 @@
         ]
       },
       "optimized": {
-        "overall_score": 0.923,
-        "badcase_count": 6,
+        "overall_score": 0.944,
+        "badcase_count": 0,
         "episodes": 3,
         "shots": 30,
         "schema_valid": true,
-        "root_causes": [
-          "文学描写没有充分转译为摄影机可捕捉的动作、构图、光影和道具。"
-        ],
+        "root_causes": [],
         "episode_scores": [
           {
             "episode": 1,
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.76,
+            "visual": 0.91,
             "continuity": 0.85,
             "dialogue_language": 1.0,
             "passed": true
@@ -283,7 +277,7 @@
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.76,
+            "visual": 0.91,
             "continuity": 0.85,
             "dialogue_language": 1.0,
             "passed": true
@@ -293,7 +287,7 @@
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.76,
+            "visual": 0.91,
             "continuity": 0.85,
             "dialogue_language": 1.0,
             "passed": true
@@ -358,21 +352,19 @@
         ]
       },
       "optimized": {
-        "overall_score": 0.923,
-        "badcase_count": 6,
+        "overall_score": 0.944,
+        "badcase_count": 0,
         "episodes": 3,
         "shots": 30,
         "schema_valid": true,
-        "root_causes": [
-          "文学描写没有充分转译为摄影机可捕捉的动作、构图、光影和道具。"
-        ],
+        "root_causes": [],
         "episode_scores": [
           {
             "episode": 1,
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.76,
+            "visual": 0.91,
             "continuity": 0.85,
             "dialogue_language": 1.0,
             "passed": true
@@ -382,7 +374,7 @@
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.76,
+            "visual": 0.91,
             "continuity": 0.85,
             "dialogue_language": 1.0,
             "passed": true
@@ -392,7 +384,7 @@
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.76,
+            "visual": 0.91,
             "continuity": 0.85,
             "dialogue_language": 1.0,
             "passed": true
@@ -457,21 +449,19 @@
         ]
       },
       "optimized": {
-        "overall_score": 0.923,
-        "badcase_count": 6,
+        "overall_score": 0.944,
+        "badcase_count": 0,
         "episodes": 3,
         "shots": 30,
         "schema_valid": true,
-        "root_causes": [
-          "文学描写没有充分转译为摄影机可捕捉的动作、构图、光影和道具。"
-        ],
+        "root_causes": [],
         "episode_scores": [
           {
             "episode": 1,
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.76,
+            "visual": 0.91,
             "continuity": 0.85,
             "dialogue_language": 1.0,
             "passed": true
@@ -481,7 +471,7 @@
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.76,
+            "visual": 0.91,
             "continuity": 0.85,
             "dialogue_language": 1.0,
             "passed": true
@@ -491,7 +481,7 @@
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.76,
+            "visual": 0.91,
             "continuity": 0.85,
             "dialogue_language": 1.0,
             "passed": true

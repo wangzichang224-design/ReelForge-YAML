@@ -16,8 +16,10 @@ SYSTEM_PROMPT = """你是一个顶级竖屏短剧改编导演、编剧和 AI 视
 3. 每章默认改编为 1 集，每集 10-15 个 shots，第一镜头 purpose 必须是 opening_hook，最后一镜头 purpose 必须是 cliffhanger。
 4. 严格音画分离：visual_track 只写画面和运镜；audio_track 写台词、音效、音乐。
 5. visual_track.video_prompt 必须是英文，适合 Kling/Runway/可灵/即梦等视频模型，包含主体、动作、场景、光影、竖屏 9:16。
-6. 每个 episode 和 shot 必须保留 source_ref/source_map，用原文片段证明改编来源，禁止凭空新增关键剧情。
-7. 作者拿到 YAML 后要能继续人工编辑，所以字段要清晰、短句化、可复用。
+6. 禁止在 video_prompt 中用 inner thought、complex emotion、heartbroken、暗自盘算、心如死灰等抽象词替代动作。
+7. 低冲突章节必须把手机、屏幕、账单、录音、监控、文件、针管、印章等道具前置成可拍镜头。
+8. 每个 episode 和 shot 必须保留 source_ref/source_map，用原文片段证明改编来源，禁止凭空新增关键剧情。
+9. 作者拿到 YAML 后要能继续人工编辑，所以字段要清晰、短句化、可复用。
 """
 
 
@@ -52,6 +54,9 @@ def build_generation_prompt(
             "每一集最后 1 个 shot 的 purpose 必须是 cliffhanger。",
             "每个 shot 必须包含 visual_track、audio_track、source_ref。",
             "visual_track.video_prompt 必须为英文，并显式包含 vertical 9:16 或 9:16。",
+            "visual_track.video_prompt 必须包含 shot type、主体、具体动作、场景/环境、camera movement 或 lighting。",
+            "不要输出 inner thought、complex emotion、heartbroken 等抽象文学 video_prompt。",
+            "遇到平淡内心独白或低冲突段落时，必须改写为屏幕信息、录音、文件、监控、账单、电话、针管、印章等可见道具动作。",
             "不要为了节省篇幅省略镜头；即使剧情短，也必须拆成足够数量的可拍镜头。",
         ],
         "input_chapter_count": len(chapters),

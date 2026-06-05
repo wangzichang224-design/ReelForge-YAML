@@ -35,7 +35,7 @@ python scripts\run_golden_benchmark.py --sample-id palace_lantern
 - `reports/golden_benchmark.json`：机器可读的分数、badcase 数和 root cause。
 - `reports/golden_benchmark.md`：可放进 README 或 demo 讲解的摘要表。
 
-当前离线 baseline 的 raw badcases 为 75，optimized badcases 为 30，badcase reduction rate 为 0.6。这个结果说明 critic loop 能稳定减少坏例；严格视觉语法和中文台词指标加入后，后续优化重点会更集中在 prompt 和局部重写质量。
+当前离线 baseline 的 raw badcases 为 75，optimized badcases 为 0，badcase reduction rate 为 1.0。这个结果说明 critic loop、视觉黑板和局部重写能把离线样例中的硬规则 badcase 全部修复；真实模型输出仍需要继续用 DeepSeek 样例复核。
 
 ## Metrics
 
@@ -60,6 +60,7 @@ python scripts\run_golden_benchmark.py --sample-id palace_lantern
 
 - 假 opening hook：把前 6 个镜头里冲突最强的镜头提前，或改成黄金三秒对峙。
 - 弱 video prompt：补足 shot type、主体动作、道具、光影、vertical 9:16。
+- 抽象画面说明：同时改写 `visual_notes_zh` 和 `video_prompt`，避免中文说明保留“心理/内心”等不可拍表达。
 - 角色漂移：把 `visual_bible` 中的固定角色提示注入相关镜头。
 
 ## Checked-In Badcase Result

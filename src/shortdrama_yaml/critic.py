@@ -17,7 +17,13 @@ CRITIC_SYSTEM_PROMPT = """你是一位深谙爆款短剧流量密码的金牌网
 3. 权力翻转：本集是否发生掌控权、财富优势、心理优势的变化。
 4. 骗氪钩子：结尾是否卡在真相即将揭晓、危机降临、身份暴露或反派反扑之前。
 
-只输出 JSON object，不要 Markdown。
+只输出 JSON object，不要 Markdown。badcases 必须是数组，每项包含：
+- failed_metric
+- target_path
+- root_cause
+- source_sentence_to_use
+- rewrite_instruction
+- severity
 """
 
 
@@ -73,6 +79,7 @@ class ScriptCritic:
                 "video_prompt 含抽象文学词则给出摄影机可捕捉改法。",
                 "结尾没有骗氪钩子则给出三种 cliffhanger 改法。",
                 "只输出 JSON，包含 passed, badcases, root_causes, repair_suggestions。",
+                "badcases 每项必须包含 failed_metric, target_path, root_cause, source_sentence_to_use, rewrite_instruction, severity。",
             ],
             "current_rule_report": report.model_dump(mode="json", exclude_none=True),
             "script": document.model_dump(mode="json", exclude_none=True),
