@@ -118,7 +118,7 @@ Full design notes are in [docs/YAML_SCHEMA.md](docs/YAML_SCHEMA.md).
 ## Quick Start
 
 ```powershell
-cd D:\03_AI_Projects\shortdrama-yaml-studio
+cd D:\03_AI_Projects\ReelForge-YAML
 python -m streamlit run app.py
 ```
 
@@ -274,7 +274,7 @@ This benchmark is the main proof that ReelForge is not only a schema validator:
 ## Test
 
 ```powershell
-cd D:\03_AI_Projects\shortdrama-yaml-studio
+cd D:\03_AI_Projects\ReelForge-YAML
 python -m pytest
 ```
 

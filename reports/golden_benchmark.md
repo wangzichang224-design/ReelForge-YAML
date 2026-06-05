@@ -1,6 +1,6 @@
 # Golden Benchmark Report
 
-- Generated at: `2026-06-05T07:56:51.429217+00:00`
+- Generated at: `2026-06-05T07:59:58.621360+00:00`
 - Dataset: `samples/golden_dataset.yaml`
 - Mode: `offline_demo_raw_vs_scratchpad_critic`
 - Samples: 5
