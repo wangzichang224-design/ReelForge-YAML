@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-06-05T07:46:19.069733+00:00",
+  "generated_at": "2026-06-05T07:50:27.441401+00:00",
   "dataset": "samples/golden_dataset.yaml",
   "mode": "offline_demo_raw_vs_scratchpad_critic",
   "summary": {
     "sample_count": 5,
-    "raw_average_score": 0.883,
-    "optimized_average_score": 0.95,
-    "raw_badcases": 150,
+    "raw_average_score": 0.905,
+    "optimized_average_score": 0.923,
+    "raw_badcases": 75,
     "optimized_badcases": 30,
-    "badcase_reduction_rate": 0.8
+    "badcase_reduction_rate": 0.6
   },
   "results": [
     {
@@ -20,8 +20,8 @@
       "expected_episodes": 3,
       "expected_shots": 30,
       "raw": {
-        "overall_score": 0.883,
-        "badcase_count": 30,
+        "overall_score": 0.905,
+        "badcase_count": 15,
         "episodes": 3,
         "shots": 30,
         "schema_valid": true,
@@ -34,8 +34,9 @@
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.6,
+            "visual": 0.635,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": false
           },
           {
@@ -43,8 +44,9 @@
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.6,
+            "visual": 0.635,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": false
           },
           {
@@ -52,14 +54,15 @@
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.6,
+            "visual": 0.635,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": false
           }
         ]
       },
       "optimized": {
-        "overall_score": 0.95,
+        "overall_score": 0.923,
         "badcase_count": 6,
         "episodes": 3,
         "shots": 30,
@@ -70,29 +73,32 @@
         "episode_scores": [
           {
             "episode": 1,
-            "hook": 1.0,
+            "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.85,
+            "visual": 0.76,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": true
           },
           {
             "episode": 2,
-            "hook": 1.0,
+            "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.85,
+            "visual": 0.76,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": true
           },
           {
             "episode": 3,
-            "hook": 1.0,
+            "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.85,
+            "visual": 0.76,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": true
           }
         ]
@@ -113,8 +119,8 @@
       "expected_episodes": 3,
       "expected_shots": 30,
       "raw": {
-        "overall_score": 0.883,
-        "badcase_count": 30,
+        "overall_score": 0.905,
+        "badcase_count": 15,
         "episodes": 3,
         "shots": 30,
         "schema_valid": true,
@@ -127,8 +133,9 @@
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.6,
+            "visual": 0.635,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": false
           },
           {
@@ -136,8 +143,9 @@
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.6,
+            "visual": 0.635,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": false
           },
           {
@@ -145,14 +153,15 @@
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.6,
+            "visual": 0.635,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": false
           }
         ]
       },
       "optimized": {
-        "overall_score": 0.95,
+        "overall_score": 0.923,
         "badcase_count": 6,
         "episodes": 3,
         "shots": 30,
@@ -163,29 +172,32 @@
         "episode_scores": [
           {
             "episode": 1,
-            "hook": 1.0,
+            "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.85,
+            "visual": 0.76,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": true
           },
           {
             "episode": 2,
-            "hook": 1.0,
+            "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.85,
+            "visual": 0.76,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": true
           },
           {
             "episode": 3,
-            "hook": 1.0,
+            "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.85,
+            "visual": 0.76,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": true
           }
         ]
@@ -205,8 +217,8 @@
       "expected_episodes": 3,
       "expected_shots": 30,
       "raw": {
-        "overall_score": 0.883,
-        "badcase_count": 30,
+        "overall_score": 0.905,
+        "badcase_count": 15,
         "episodes": 3,
         "shots": 30,
         "schema_valid": true,
@@ -219,8 +231,9 @@
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.6,
+            "visual": 0.635,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": false
           },
           {
@@ -228,8 +241,9 @@
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.6,
+            "visual": 0.635,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": false
           },
           {
@@ -237,14 +251,15 @@
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.6,
+            "visual": 0.635,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": false
           }
         ]
       },
       "optimized": {
-        "overall_score": 0.95,
+        "overall_score": 0.923,
         "badcase_count": 6,
         "episodes": 3,
         "shots": 30,
@@ -255,29 +270,32 @@
         "episode_scores": [
           {
             "episode": 1,
-            "hook": 1.0,
+            "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.85,
+            "visual": 0.76,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": true
           },
           {
             "episode": 2,
-            "hook": 1.0,
+            "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.85,
+            "visual": 0.76,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": true
           },
           {
             "episode": 3,
-            "hook": 1.0,
+            "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.85,
+            "visual": 0.76,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": true
           }
         ]
@@ -298,8 +316,8 @@
       "expected_episodes": 3,
       "expected_shots": 30,
       "raw": {
-        "overall_score": 0.883,
-        "badcase_count": 30,
+        "overall_score": 0.905,
+        "badcase_count": 15,
         "episodes": 3,
         "shots": 30,
         "schema_valid": true,
@@ -312,8 +330,9 @@
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.6,
+            "visual": 0.635,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": false
           },
           {
@@ -321,8 +340,9 @@
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.6,
+            "visual": 0.635,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": false
           },
           {
@@ -330,14 +350,15 @@
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.6,
+            "visual": 0.635,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": false
           }
         ]
       },
       "optimized": {
-        "overall_score": 0.95,
+        "overall_score": 0.923,
         "badcase_count": 6,
         "episodes": 3,
         "shots": 30,
@@ -348,29 +369,32 @@
         "episode_scores": [
           {
             "episode": 1,
-            "hook": 1.0,
+            "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.85,
+            "visual": 0.76,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": true
           },
           {
             "episode": 2,
-            "hook": 1.0,
+            "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.85,
+            "visual": 0.76,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": true
           },
           {
             "episode": 3,
-            "hook": 1.0,
+            "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.85,
+            "visual": 0.76,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": true
           }
         ]
@@ -391,8 +415,8 @@
       "expected_episodes": 3,
       "expected_shots": 30,
       "raw": {
-        "overall_score": 0.883,
-        "badcase_count": 30,
+        "overall_score": 0.905,
+        "badcase_count": 15,
         "episodes": 3,
         "shots": 30,
         "schema_valid": true,
@@ -405,8 +429,9 @@
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.6,
+            "visual": 0.635,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": false
           },
           {
@@ -414,8 +439,9 @@
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.6,
+            "visual": 0.635,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": false
           },
           {
@@ -423,14 +449,15 @@
             "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.6,
+            "visual": 0.635,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": false
           }
         ]
       },
       "optimized": {
-        "overall_score": 0.95,
+        "overall_score": 0.923,
         "badcase_count": 6,
         "episodes": 3,
         "shots": 30,
@@ -441,29 +468,32 @@
         "episode_scores": [
           {
             "episode": 1,
-            "hook": 1.0,
+            "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.85,
+            "visual": 0.76,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": true
           },
           {
             "episode": 2,
-            "hook": 1.0,
+            "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.85,
+            "visual": 0.76,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": true
           },
           {
             "episode": 3,
-            "hook": 1.0,
+            "hook": 0.85,
             "cliffhanger": 1.0,
             "power_shift": 1.0,
-            "visual": 0.85,
+            "visual": 0.76,
             "continuity": 0.85,
+            "dialogue_language": 1.0,
             "passed": true
           }
         ]

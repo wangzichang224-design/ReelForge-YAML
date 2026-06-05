@@ -35,7 +35,7 @@ python scripts\run_golden_benchmark.py --sample-id palace_lantern
 - `reports/golden_benchmark.json`：机器可读的分数、badcase 数和 root cause。
 - `reports/golden_benchmark.md`：可放进 README 或 demo 讲解的摘要表。
 
-当前离线 baseline 的 raw badcases 为 150，optimized badcases 为 30，badcase reduction rate 为 0.8。这个结果说明 critic loop 能稳定减少坏例，但 raw 分数在不同样例上仍偏同质化，后续需要继续加强 evaluator 和 prompt，让 benchmark 更有区分度。
+当前离线 baseline 的 raw badcases 为 75，optimized badcases 为 30，badcase reduction rate 为 0.6。这个结果说明 critic loop 能稳定减少坏例；严格视觉语法和中文台词指标加入后，后续优化重点会更集中在 prompt 和局部重写质量。
 
 ## Metrics
 
@@ -44,9 +44,10 @@ python scripts\run_golden_benchmark.py --sample-id palace_lantern
 - `hook_score`：首镜头是否直接出现冲突、羞辱、逼问、证据、阻拦、言语压迫或具体对抗动作。
 - `cliffhanger_score`：尾镜头是否卡在真相、危机、身份暴露、证据揭晓或反派反扑之前。
 - `power_shift_score`：每集是否存在 reversal/payoff，且情绪曲线里有反转、打脸、揭露或失控。
-- `visual_executability_score`：英文 `video_prompt` 是否包含 shot type、camera movement、concrete action、lighting、vertical 9:16，并拒绝抽象文学词。
-- `continuity_score`：同一角色是否继承 `visual_bible` 的固定外观提示，避免跨集服装/年龄/气质漂移。
+- `visual_executability_score`：英文 `video_prompt` 是否包含 shot type、主体动作、场景/环境、camera/lighting、vertical 9:16，并拒绝抽象文学词。
+- `continuity_score`：同一角色是否继承 `visual_bible` 的固定外观提示，避免跨集服装/年龄/气质漂移；古风样例不会把 `ancient costume` 固定误判为漂移。
 - `provenance_score`：`source_ref` 是否是真实原文片段；标记“原文未直接描述/改编自情境”的镜头会进入 badcase。
+- `dialogue_language_score`：检查 `audio_track.dialogue.text` 是否以中文短剧台词为主，避免把作者可编辑对白写成英文提示词。
 
 ## Critic-Generator Protocol
 

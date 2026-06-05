@@ -85,6 +85,18 @@ EXECUTABLE_TERMS = {
     "shot",
 }
 
+CAMERA_LIGHT_TERMS = {
+    "camera",
+    "lighting",
+    "light",
+    "push-in",
+    "dolly",
+    "handheld",
+    "tracking",
+    "freeze-frame",
+    "cinematic",
+}
+
 CONCRETE_ACTION_TERMS = {
     "holding",
     "walking",
@@ -100,6 +112,32 @@ CONCRETE_ACTION_TERMS = {
     "looking",
     "turning",
     "holding up",
+    "points",
+    "pointing",
+    "blocks",
+    "shows",
+    "raises",
+    "grabs",
+    "typing",
+    "clicking",
+    "recording",
+}
+
+SCENE_TERMS = {
+    "banquet",
+    "hospital",
+    "office",
+    "meeting room",
+    "palace",
+    "gate",
+    "warehouse",
+    "screen",
+    "hallway",
+    "street",
+    "car",
+    "room",
+    "background",
+    "interior",
 }
 
 ABSTRACT_TERMS = {
@@ -181,9 +219,11 @@ def evaluate_episode(
     visual_score, visual_badcases = _score_visual_executability(episode, episode_index)
     continuity_score, continuity_badcases = _score_continuity(episode, episode_index, visual_bible)
     provenance_score, provenance_badcases = _score_provenance(episode, episode_index)
+    dialogue_score, dialogue_badcases = _score_dialogue_language(episode, episode_index)
     badcases.extend(visual_badcases)
     badcases.extend(continuity_badcases)
     badcases.extend(provenance_badcases)
+    badcases.extend(dialogue_badcases)
 
     if hook_score < 0.75:
         first = episode.shots[0]
@@ -233,6 +273,7 @@ def evaluate_episode(
         visual_score,
         continuity_score,
         provenance_score,
+        dialogue_score,
     ]
     overall_score = round(mean(scores), 3)
     score = EpisodeQualityScore(
@@ -243,11 +284,13 @@ def evaluate_episode(
         visual_executability_score=round(visual_score, 3),
         continuity_score=round(continuity_score, 3),
         provenance_score=round(provenance_score, 3),
+        dialogue_language_score=round(dialogue_score, 3),
         overall_score=overall_score,
         passed=overall_score >= 0.8
         and hook_score >= 0.75
         and cliffhanger_score >= 0.75
-        and visual_score >= 0.75,
+        and visual_score >= 0.75
+        and dialogue_score >= 0.75,
         cliffhanger_options=build_cliffhanger_options(episode),
     )
     return score, badcases
@@ -304,10 +347,21 @@ def _score_visual_executability(
     for shot_index, shot in enumerate(episode.shots):
         prompt = shot.visual_track.video_prompt.lower()
         notes = shot.visual_track.visual_notes_zh
-        has_syntax = any(term in prompt for term in EXECUTABLE_TERMS)
+        has_shot_type = any(term in prompt for term in EXECUTABLE_TERMS)
         has_action = any(term in prompt for term in CONCRETE_ACTION_TERMS)
+        has_scene = any(term in prompt for term in SCENE_TERMS)
+        has_camera_or_light = any(term in prompt for term in CAMERA_LIGHT_TERMS)
+        has_aspect = "9:16" in prompt or "vertical" in prompt
         has_abstract = _contains_any(prompt, ABSTRACT_TERMS) or _contains_any(notes, ABSTRACT_TERMS)
-        score = 0.4 + (0.3 if has_syntax else 0.0) + (0.25 if has_action else 0.0) - (0.5 if has_abstract else 0.0)
+        score = (
+            0.2
+            + (0.2 if has_shot_type else 0.0)
+            + (0.25 if has_action else 0.0)
+            + (0.15 if has_scene else 0.0)
+            + (0.15 if has_camera_or_light else 0.0)
+            + (0.1 if has_aspect else 0.0)
+            - (0.5 if has_abstract else 0.0)
+        )
         score = max(0.0, min(1.0, score))
         shot_scores.append(score)
         if score < 0.75:
@@ -316,9 +370,9 @@ def _score_visual_executability(
                     metric="visual_executability",
                     severity="high" if has_abstract else "medium",
                     target_path=f"episodes[{episode_index}].shots[{shot_index}].visual_track.video_prompt",
-                    reason="video_prompt 缺少可拍动作/镜头语法，或含抽象文学表达。",
+                    reason="video_prompt 缺少完整视频提示词语法，或含抽象文学表达。",
                     root_cause="文学描写没有充分转译为摄影机可捕捉的动作、构图、光影和道具。",
-                    repair_suggestion="改写为 shot type + concrete action + subject + environment + lighting + vertical 9:16。",
+                    repair_suggestion="改写为 shot type + subject + concrete action + scene/environment + camera/lighting + vertical 9:16。",
                     source_excerpt=shot.source_ref.source_excerpt,
                 )
             )
@@ -336,6 +390,7 @@ def _score_continuity(
     checked = 0
     passed = 0
     assets = {asset.character_id: asset for asset in visual_bible.characters}
+    allowed_drift_terms = _allowed_drift_terms(visual_bible)
     for shot_index, shot in enumerate(episode.shots):
         prompt = shot.visual_track.video_prompt.lower()
         for character_id in shot.characters:
@@ -344,7 +399,11 @@ def _score_continuity(
                 continue
             checked += 1
             prompt_hits = sum(1 for trait in asset.locked_traits if trait.lower() in prompt)
-            drift_hits = [term for term in asset.negative_drift_terms if term.lower() in prompt]
+            drift_hits = [
+                term
+                for term in asset.negative_drift_terms
+                if term.lower() in prompt and term.lower() not in allowed_drift_terms
+            ]
             if prompt_hits >= 1 and not drift_hits:
                 passed += 1
             else:
@@ -362,6 +421,49 @@ def _score_continuity(
     if checked == 0:
         return 0.85, []
     return passed / checked, badcases[:8]
+
+
+def _score_dialogue_language(
+    episode: Episode,
+    episode_index: int,
+) -> tuple[float, list[QualityBadcase]]:
+    badcases: list[QualityBadcase] = []
+    dialogue_lines = [
+        line
+        for shot in episode.shots
+        for line in shot.audio_track.dialogue
+    ]
+    if not dialogue_lines:
+        return 0.0, [
+            QualityBadcase(
+                metric="dialogue_language",
+                severity="medium",
+                target_path=f"episodes[{episode_index}].audio_track.dialogue",
+                reason="本集没有可用中文台词。",
+                root_cause="剧本过度依赖画面描述，缺少短剧对抗台词。",
+                repair_suggestion="至少为 opening_hook、reversal 和 cliffhanger 镜头补充中文台词。",
+            )
+        ]
+
+    passed = 0
+    for line in dialogue_lines:
+        cjk_chars = len(re.findall(r"[\u4e00-\u9fff]", line.text))
+        ascii_letters = len(re.findall(r"[A-Za-z]", line.text))
+        if cjk_chars >= 2 and cjk_chars >= ascii_letters:
+            passed += 1
+    score = passed / len(dialogue_lines)
+    if score < 0.75:
+        badcases.append(
+            QualityBadcase(
+                metric="dialogue_language",
+                severity="medium",
+                target_path=f"episodes[{episode_index}].audio_track.dialogue",
+                reason="本集台词不是以中文为主，或中文短剧对抗台词不足。",
+                root_cause="生成模型把作者可编辑的中文对白写成了英文/空白/提示词式文本。",
+                repair_suggestion="保留 video_prompt 英文，但 dialogue.text 必须使用中文短句。",
+            )
+        )
+    return score, badcases
 
 
 def _score_provenance(
@@ -393,6 +495,18 @@ def _score_provenance(
 def _contains_any(text: str, terms: set[str]) -> bool:
     lowered = text.lower()
     return any(term.lower() in lowered for term in terms)
+
+
+def _allowed_drift_terms(visual_bible: VisualBible) -> set[str]:
+    style = " ".join(
+        [
+            visual_bible.global_style,
+            " ".join(visual_bible.key_locations),
+        ]
+    ).lower()
+    if any(term in style for term in ["古风", "宫", "权谋", "长安", "palace", "ancient"]):
+        return {"ancient costume"}
+    return set()
 
 
 def _shot_text(shot: Shot) -> str:
