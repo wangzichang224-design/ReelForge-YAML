@@ -240,6 +240,28 @@ After enabling the global scratchpad and local critic rewrite:
 
 Design notes for this loop are in [docs/EVALUATION.md](docs/EVALUATION.md).
 
+## Golden Benchmark
+
+Run the full offline benchmark across all registered golden samples:
+
+```powershell
+python scripts\run_golden_benchmark.py
+```
+
+Checked-in benchmark report:
+
+- Markdown: [reports/golden_benchmark.md](reports/golden_benchmark.md)
+- JSON: [reports/golden_benchmark.json](reports/golden_benchmark.json)
+
+Current offline baseline:
+
+- samples = 5
+- raw_average_score = 0.883
+- optimized_average_score = 0.95
+- raw_badcases = 150
+- optimized_badcases = 30
+- badcase_reduction_rate = 0.8
+
 ## Test
 
 ```powershell
