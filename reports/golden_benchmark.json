@@ -1,0 +1,479 @@
+{
+  "generated_at": "2026-06-05T07:46:19.069733+00:00",
+  "dataset": "samples/golden_dataset.yaml",
+  "mode": "offline_demo_raw_vs_scratchpad_critic",
+  "summary": {
+    "sample_count": 5,
+    "raw_average_score": 0.883,
+    "optimized_average_score": 0.95,
+    "raw_badcases": 150,
+    "optimized_badcases": 30,
+    "badcase_reduction_rate": 0.8
+  },
+  "results": [
+    {
+      "id": "shadow_contract",
+      "title": "影子合约",
+      "genre": "都市商战 / 复仇反转",
+      "input": "samples/eval_novel_shadow_contract_3ch.txt",
+      "chapter_count": 3,
+      "expected_episodes": 3,
+      "expected_shots": 30,
+      "raw": {
+        "overall_score": 0.883,
+        "badcase_count": 30,
+        "episodes": 3,
+        "shots": 30,
+        "schema_valid": true,
+        "root_causes": [
+          "文学描写没有充分转译为摄影机可捕捉的动作、构图、光影和道具。"
+        ],
+        "episode_scores": [
+          {
+            "episode": 1,
+            "hook": 0.85,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.6,
+            "continuity": 0.85,
+            "passed": false
+          },
+          {
+            "episode": 2,
+            "hook": 0.85,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.6,
+            "continuity": 0.85,
+            "passed": false
+          },
+          {
+            "episode": 3,
+            "hook": 0.85,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.6,
+            "continuity": 0.85,
+            "passed": false
+          }
+        ]
+      },
+      "optimized": {
+        "overall_score": 0.95,
+        "badcase_count": 6,
+        "episodes": 3,
+        "shots": 30,
+        "schema_valid": true,
+        "root_causes": [
+          "文学描写没有充分转译为摄影机可捕捉的动作、构图、光影和道具。"
+        ],
+        "episode_scores": [
+          {
+            "episode": 1,
+            "hook": 1.0,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.85,
+            "continuity": 0.85,
+            "passed": true
+          },
+          {
+            "episode": 2,
+            "hook": 1.0,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.85,
+            "continuity": 0.85,
+            "passed": true
+          },
+          {
+            "episode": 3,
+            "hook": 1.0,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.85,
+            "continuity": 0.85,
+            "passed": true
+          }
+        ]
+      },
+      "target_must_have": [
+        "首镜头直接出现对峙、羞辱、证据冲突或言语压迫",
+        "每集至少一次 power shift",
+        "每集末尾必须是 cliffhanger",
+        "video_prompt 必须可被摄影机执行"
+      ]
+    },
+    {
+      "id": "quiet_transition",
+      "title": "空办公室",
+      "genre": "创业现实 / 平淡戏剧化",
+      "input": "samples/eval_novel_quiet_transition_3ch.txt",
+      "chapter_count": 3,
+      "expected_episodes": 3,
+      "expected_shots": 30,
+      "raw": {
+        "overall_score": 0.883,
+        "badcase_count": 30,
+        "episodes": 3,
+        "shots": 30,
+        "schema_valid": true,
+        "root_causes": [
+          "文学描写没有充分转译为摄影机可捕捉的动作、构图、光影和道具。"
+        ],
+        "episode_scores": [
+          {
+            "episode": 1,
+            "hook": 0.85,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.6,
+            "continuity": 0.85,
+            "passed": false
+          },
+          {
+            "episode": 2,
+            "hook": 0.85,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.6,
+            "continuity": 0.85,
+            "passed": false
+          },
+          {
+            "episode": 3,
+            "hook": 0.85,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.6,
+            "continuity": 0.85,
+            "passed": false
+          }
+        ]
+      },
+      "optimized": {
+        "overall_score": 0.95,
+        "badcase_count": 6,
+        "episodes": 3,
+        "shots": 30,
+        "schema_valid": true,
+        "root_causes": [
+          "文学描写没有充分转译为摄影机可捕捉的动作、构图、光影和道具。"
+        ],
+        "episode_scores": [
+          {
+            "episode": 1,
+            "hook": 1.0,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.85,
+            "continuity": 0.85,
+            "passed": true
+          },
+          {
+            "episode": 2,
+            "hook": 1.0,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.85,
+            "continuity": 0.85,
+            "passed": true
+          },
+          {
+            "episode": 3,
+            "hook": 1.0,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.85,
+            "continuity": 0.85,
+            "passed": true
+          }
+        ]
+      },
+      "target_must_have": [
+        "把内心独白转成动作、道具、屏幕信息和对话",
+        "把沉默群聊、录音、账单等低冲突材料改造成短剧卡点",
+        "避免抽象文学 video_prompt"
+      ]
+    },
+    {
+      "id": "palace_lantern",
+      "title": "长安灯影案",
+      "genre": "古风权谋 / 证据反转",
+      "input": "samples/eval_novel_palace_lantern_3ch.txt",
+      "chapter_count": 3,
+      "expected_episodes": 3,
+      "expected_shots": 30,
+      "raw": {
+        "overall_score": 0.883,
+        "badcase_count": 30,
+        "episodes": 3,
+        "shots": 30,
+        "schema_valid": true,
+        "root_causes": [
+          "文学描写没有充分转译为摄影机可捕捉的动作、构图、光影和道具。"
+        ],
+        "episode_scores": [
+          {
+            "episode": 1,
+            "hook": 0.85,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.6,
+            "continuity": 0.85,
+            "passed": false
+          },
+          {
+            "episode": 2,
+            "hook": 0.85,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.6,
+            "continuity": 0.85,
+            "passed": false
+          },
+          {
+            "episode": 3,
+            "hook": 0.85,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.6,
+            "continuity": 0.85,
+            "passed": false
+          }
+        ]
+      },
+      "optimized": {
+        "overall_score": 0.95,
+        "badcase_count": 6,
+        "episodes": 3,
+        "shots": 30,
+        "schema_valid": true,
+        "root_causes": [
+          "文学描写没有充分转译为摄影机可捕捉的动作、构图、光影和道具。"
+        ],
+        "episode_scores": [
+          {
+            "episode": 1,
+            "hook": 1.0,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.85,
+            "continuity": 0.85,
+            "passed": true
+          },
+          {
+            "episode": 2,
+            "hook": 1.0,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.85,
+            "continuity": 0.85,
+            "passed": true
+          },
+          {
+            "episode": 3,
+            "hook": 1.0,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.85,
+            "continuity": 0.85,
+            "passed": true
+          }
+        ]
+      },
+      "target_must_have": [
+        "古风服装、宫灯、午门、军械库等视觉资产必须稳定继承",
+        "首镜头必须直接进入谋害皇后、当众逼罪或证据冲突",
+        "每集必须发生一次权力翻转",
+        "evaluator 不应把 ancient costume 固定判为外观漂移"
+      ]
+    },
+    {
+      "id": "hospital_will",
+      "title": "病房里的继承书",
+      "genre": "医疗家庭 / 遗嘱打脸",
+      "input": "samples/eval_novel_hospital_will_3ch.txt",
+      "chapter_count": 3,
+      "expected_episodes": 3,
+      "expected_shots": 30,
+      "raw": {
+        "overall_score": 0.883,
+        "badcase_count": 30,
+        "episodes": 3,
+        "shots": 30,
+        "schema_valid": true,
+        "root_causes": [
+          "文学描写没有充分转译为摄影机可捕捉的动作、构图、光影和道具。"
+        ],
+        "episode_scores": [
+          {
+            "episode": 1,
+            "hook": 0.85,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.6,
+            "continuity": 0.85,
+            "passed": false
+          },
+          {
+            "episode": 2,
+            "hook": 0.85,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.6,
+            "continuity": 0.85,
+            "passed": false
+          },
+          {
+            "episode": 3,
+            "hook": 0.85,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.6,
+            "continuity": 0.85,
+            "passed": false
+          }
+        ]
+      },
+      "optimized": {
+        "overall_score": 0.95,
+        "badcase_count": 6,
+        "episodes": 3,
+        "shots": 30,
+        "schema_valid": true,
+        "root_causes": [
+          "文学描写没有充分转译为摄影机可捕捉的动作、构图、光影和道具。"
+        ],
+        "episode_scores": [
+          {
+            "episode": 1,
+            "hook": 1.0,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.85,
+            "continuity": 0.85,
+            "passed": true
+          },
+          {
+            "episode": 2,
+            "hook": 1.0,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.85,
+            "continuity": 0.85,
+            "passed": true
+          },
+          {
+            "episode": 3,
+            "hook": 1.0,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.85,
+            "continuity": 0.85,
+            "passed": true
+          }
+        ]
+      },
+      "target_must_have": [
+        "首镜头必须出现逼签、直播羞辱、病房对峙或遗嘱证据",
+        "录音笔、病历夹、针管、电子签名等道具要进入 video_prompt",
+        "每集尾镜头必须卡在遗嘱、身份或父亲醒来之前",
+        "中文台词必须保留家庭伦理短剧的压迫感"
+      ]
+    },
+    {
+      "id": "midnight_refund",
+      "title": "凌晨三点的退款单",
+      "genre": "客服职场 / 低冲突悬疑",
+      "input": "samples/eval_novel_midnight_refund_3ch.txt",
+      "chapter_count": 3,
+      "expected_episodes": 3,
+      "expected_shots": 30,
+      "raw": {
+        "overall_score": 0.883,
+        "badcase_count": 30,
+        "episodes": 3,
+        "shots": 30,
+        "schema_valid": true,
+        "root_causes": [
+          "文学描写没有充分转译为摄影机可捕捉的动作、构图、光影和道具。"
+        ],
+        "episode_scores": [
+          {
+            "episode": 1,
+            "hook": 0.85,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.6,
+            "continuity": 0.85,
+            "passed": false
+          },
+          {
+            "episode": 2,
+            "hook": 0.85,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.6,
+            "continuity": 0.85,
+            "passed": false
+          },
+          {
+            "episode": 3,
+            "hook": 0.85,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.6,
+            "continuity": 0.85,
+            "passed": false
+          }
+        ]
+      },
+      "optimized": {
+        "overall_score": 0.95,
+        "badcase_count": 6,
+        "episodes": 3,
+        "shots": 30,
+        "schema_valid": true,
+        "root_causes": [
+          "文学描写没有充分转译为摄影机可捕捉的动作、构图、光影和道具。"
+        ],
+        "episode_scores": [
+          {
+            "episode": 1,
+            "hook": 1.0,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.85,
+            "continuity": 0.85,
+            "passed": true
+          },
+          {
+            "episode": 2,
+            "hook": 1.0,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.85,
+            "continuity": 0.85,
+            "passed": true
+          },
+          {
+            "episode": 3,
+            "hook": 1.0,
+            "cliffhanger": 1.0,
+            "power_shift": 1.0,
+            "visual": 0.85,
+            "continuity": 0.85,
+            "passed": true
+          }
+        ]
+      },
+      "target_must_have": [
+        "把内心犹豫转为屏幕、鼠标、录屏、监控和电话动作",
+        "首镜头不能只拍空办公室，必须出现退款异常或威胁信息",
+        "每集必须用订单备注、缓存录音、监控回放制造 cliffhanger",
+        "避免 inner thought、complex emotion 等抽象 video_prompt"
+      ]
+    }
+  ]
+}

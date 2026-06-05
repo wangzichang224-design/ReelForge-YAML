@@ -21,6 +21,22 @@
 
 每个样例都保存 expected targets，而不是只保存输入文本。这样每次改 prompt 或改 pipeline 都可以对同一批硬指标做对比。
 
+## Benchmark Runner
+
+`scripts/run_golden_benchmark.py` 会批量读取 `samples/golden_dataset.yaml`，默认使用离线 demo 生成器跑 raw 与 optimized 两组结果：
+
+```powershell
+python scripts\run_golden_benchmark.py
+python scripts\run_golden_benchmark.py --sample-id palace_lantern
+```
+
+输出文件：
+
+- `reports/golden_benchmark.json`：机器可读的分数、badcase 数和 root cause。
+- `reports/golden_benchmark.md`：可放进 README 或 demo 讲解的摘要表。
+
+当前离线 baseline 的 raw badcases 为 150，optimized badcases 为 30，badcase reduction rate 为 0.8。这个结果说明 critic loop 能稳定减少坏例，但 raw 分数在不同样例上仍偏同质化，后续需要继续加强 evaluator 和 prompt，让 benchmark 更有区分度。
+
 ## Metrics
 
 `src/shortdrama_yaml/evaluator.py` 计算以下指标：
