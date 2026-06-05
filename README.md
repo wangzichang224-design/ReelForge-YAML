@@ -190,6 +190,9 @@ This repo includes a golden dataset, a generated evaluation novel and a real Dee
 - Golden dataset targets: [samples/golden_dataset.yaml](samples/golden_dataset.yaml)
 - Input novel: [samples/eval_novel_shadow_contract_3ch.txt](samples/eval_novel_shadow_contract_3ch.txt)
 - Quiet transition test: [samples/eval_novel_quiet_transition_3ch.txt](samples/eval_novel_quiet_transition_3ch.txt)
+- Palace intrigue test: [samples/eval_novel_palace_lantern_3ch.txt](samples/eval_novel_palace_lantern_3ch.txt)
+- Hospital inheritance test: [samples/eval_novel_hospital_will_3ch.txt](samples/eval_novel_hospital_will_3ch.txt)
+- Midnight refund test: [samples/eval_novel_midnight_refund_3ch.txt](samples/eval_novel_midnight_refund_3ch.txt)
 - Raw DeepSeek output: [samples/deepseek_shadow_contract_3ch_output.yaml](samples/deepseek_shadow_contract_3ch_output.yaml)
 - Optimized output: [samples/deepseek_shadow_contract_3ch_optimized.yaml](samples/deepseek_shadow_contract_3ch_optimized.yaml)
 
