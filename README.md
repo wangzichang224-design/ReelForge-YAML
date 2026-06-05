@@ -257,10 +257,10 @@ Current offline baseline:
 
 - samples = 5
 - raw_average_score = 0.905
-- optimized_average_score = 0.923
+- optimized_average_score = 0.944
 - raw_badcases = 75
-- optimized_badcases = 30
-- badcase_reduction_rate = 0.6
+- optimized_badcases = 0
+- badcase_reduction_rate = 1.0
 
 ## Test
 
