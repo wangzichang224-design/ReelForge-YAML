@@ -8,6 +8,8 @@ This checklist maps the contest rules to concrete repository actions for ReelFor
 - [ ] Runnable source code on `main`.
 - [ ] README with product explanation, setup steps, demo flow, dependencies and originality notes.
 - [ ] YAML Schema design document: `docs/YAML_SCHEMA.md`.
+- [ ] Demo narration script: `docs/DEMO_VIDEO_SCRIPT.md`.
+- [ ] PR delivery plan: `docs/PR_DELIVERY_PLAN.md`.
 - [ ] Demo video with voice narration.
 - [ ] Demo video link added to README.
 
