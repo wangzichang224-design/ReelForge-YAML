@@ -142,6 +142,8 @@ Open the local Streamlit URL and keep **使用离线 Demo 生成器** checked fo
 4. 展示“测评与优化”区：badcase、分项分、cliffhanger 备选、局部修改。
 5. 展示导出 YAML 和 Schema 文档。
 
+可直接照读的录屏脚本见 [docs/DEMO_VIDEO_SCRIPT.md](docs/DEMO_VIDEO_SCRIPT.md)。
+
 ## Contest Submission Notes
 
 为了匹配赛事提交要求，本仓库采用以下交付规范：
@@ -154,6 +156,7 @@ Open the local Streamlit URL and keep **使用离线 Demo 生成器** checked fo
 - **Commit timing**: 后续 commit 和 PR 时间应落在赛事所选批次的起止时间内；不要在最后一天一次性导入全部代码。
 
 提交前清单见 [docs/SUBMISSION_CHECKLIST.md](docs/SUBMISSION_CHECKLIST.md)。
+后续小步 PR 计划见 [docs/PR_DELIVERY_PLAN.md](docs/PR_DELIVERY_PLAN.md)。
 
 ## Dependencies & Original Work
 
