@@ -262,6 +262,15 @@ Current offline baseline:
 - optimized_badcases = 0
 - badcase_reduction_rate = 1.0
 
+### Iteration Evidence
+
+This benchmark is the main proof that ReelForge is not only a schema validator:
+
+1. **Golden dataset expansion**: the benchmark now covers urban business, quiet office transition, palace intrigue, hospital inheritance and customer-service suspense.
+2. **Measured badcases**: raw offline output still exposes 75 hard-rule badcases, mainly weak visual executability.
+3. **Targeted repair**: enabling the visual scratchpad and critic rewrite loop reduces optimized hard-rule badcases to 0 across 5 samples.
+4. **Product implication**: authors get an editable YAML draft, while the tool keeps measurable guardrails for hook, cliffhanger, power shift, visual execution, continuity, dialogue language and provenance.
+
 ## Test
 
 ```powershell

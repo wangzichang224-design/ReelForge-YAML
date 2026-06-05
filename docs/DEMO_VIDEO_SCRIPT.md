@@ -77,9 +77,13 @@ Show that ReelForge YAML satisfies the contest topic: it converts 3+ chapters of
 - 角色视觉是否跨集一致。
 - source_ref 是否来自原文。
 
-以 DeepSeek 样例为例，原始 YAML 虽然结构通过，但 3 集首镜头都被评测为假 opening hook：标了 hook，实际画面还是雨夜、车库、会议室铺垫。
+这里我重点展示 `reports/golden_benchmark.md`。我没有只跑一个样例，而是构建了 5 个 golden samples：都市商战、平淡办公室、古风权谋、医疗遗嘱、客服职场悬疑。
 
-经过 visual scratchpad 和 critic loop 后，系统只局部重写不合格镜头，优化后 3 集、30 个镜头保持不变，hook、cliffhanger、power shift、visual executability 和 continuity 都过线。
+当前 benchmark 的 raw average score 是 0.905，但 raw badcases 有 75 个，主要集中在视觉可执行性：有些画面说明还停留在文学表达，没有完整的 shot type、动作、场景、运镜和光影。
+
+经过 visual scratchpad 和 critic loop 后，系统只局部重写不合格镜头，不整篇重跑。优化后 average score 提升到 0.944，optimized badcases 从 75 降到 0，badcase reduction rate 是 1.0。
+
+这就是这个项目的迭代闭环：不是主观说“效果更好了”，而是用 golden dataset 和硬指标证明每次优化到底解决了哪些 badcase。
 
 ### 7. Human-In-The-Loop Editing
 
