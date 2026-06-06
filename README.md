@@ -1,17 +1,24 @@
 <p align="center">
-  <img src="assets/logo.svg" width="96" alt="ReelForge YAML logo" />
+  <img src="assets/logo.svg" width="96" alt="ReelForge YAML 标志" />
 </p>
 
-![ReelForge YAML banner](assets/banner.svg)
+![ReelForge YAML 横幅](assets/banner.svg)
 
 # ReelForge YAML
 
 **网文转竖屏短剧的结构化改编工作台。**  
 把 3 章以上小说自动转换为可编辑、可校验、可追溯的镜头级 YAML 剧本初稿，并为后续 AI 视频、TTS、音效和自动剪辑流水线预留接口。
 
-> Schema-first AI-assisted adaptation, built for trusted human-in-the-loop short-drama production.
+> 以 Schema 为中心的 AI 辅助改编工具，面向可信任、可编辑、可追溯的人机协同短剧生产。
 
-## Competition Brief & Product Interpretation
+## 提交入口
+
+- **YAML Schema 文档**：[docs/YAML_SCHEMA.md](docs/YAML_SCHEMA.md)
+- **B 站演示视频**：`TODO：录制完成后粘贴 B 站视频链接`
+- **小红书项目发布位**：[王子畅的小红书主页](https://www.xiaohongshu.com/user/profile/6893b1c60000000028035e28)（发布单篇项目笔记后可替换为笔记链接）
+- **可照读演示稿**：[docs/DEMO_VIDEO_SCRIPT.md](docs/DEMO_VIDEO_SCRIPT.md)
+
+## 赛事题目与产品理解
 
 本项目对应赛事题目三：**AI 小说转剧本工具**。
 
@@ -19,7 +26,7 @@
 
 我对题目的产品理解是：它不只是“让大模型续写一个剧本”，而是要把小说作者从高门槛、低确定性的改编流程里解放出来，让他们先拿到一份**结构正确、可追溯、可编辑、可评测**的剧本初稿。
 
-### User Pain Points
+### 用户痛点
 
 | 用户痛点 | 传统做法的问题 | ReelForge YAML 的解决方式 |
 | --- | --- | --- |
@@ -29,7 +36,7 @@
 | 角色和画面容易漂移 | 多章节生成时角色外观、服装、场景风格不稳定 | 增加 `visual_bible` 全局视觉黑板，固定角色和资产 |
 | “能生成”不等于“好改编” | 结构通过但开场、反转、结尾可能平淡 | 增加硬指标评测和 Critic 纠偏，暴露 badcase 并局部修复 |
 
-### Requirement Mapping
+### 需求映射
 
 | 赛事要求 | 项目实现 |
 | --- | --- |
@@ -40,7 +47,7 @@
 | 定义 YAML Schema | [docs/YAML_SCHEMA.md](docs/YAML_SCHEMA.md) 说明字段、结构和设计原因 |
 | 降低改编门槛、提升效率 | 自动完成初稿结构化、镜头拆解、台词/音画分离、来源映射和质量评测 |
 
-### Why Expand To Vertical Short Drama
+### 为什么收敛到竖屏短剧
 
 题目要求是“小说转剧本”，我将场景进一步收敛到**网文转竖屏短剧**，原因是这个方向更贴近当前小说作者的真实商业化路径：
 
@@ -51,7 +58,7 @@
 
 因此 ReelForge YAML 的核心定位是：**可信任的人机协同剧本初稿生成器**。它不追求三天内全自动生成成片，而是先把最有价值、最可交付的一步做好：把小说变成作者能编辑、系统能校验、后续流水线能使用的镜头级 YAML。
 
-## Why ReelForge
+## 为什么做 ReelForge
 
 很多小说作者想把网文改成短剧，但真正难点不只是“写成剧本”，而是把长文本压缩成能被短剧生产链路使用的结构：
 
@@ -63,30 +70,30 @@
 
 ReelForge YAML 的目标是先把“小说 → 短剧分集 → 镜头级分镜 → AI 视频友好提示词”这一步做稳。
 
-## Highlights
+## 功能亮点
 
-- **3+ chapter adaptation**: 自动识别 `第一章`、`第1章`、`Chapter 1` 等章节标题。
-- **Short-drama rhythm**: 每章默认改编为 1 集，每集 10-15 个镜头，首镜头强 hook，尾镜头 cliffhanger。
-- **Schema-first output**: 模型先输出 JSON，经 Pydantic 校验后再导出 YAML。
-- **Source Map provenance**: 每集/每镜头绑定原文片段，方便作者回改和验真。
-- **Video-ready prompts**: 每个镜头包含英文 `video_prompt`，适配主流图生视频/文生视频模型。
-- **Quality evaluation loop**: 用硬指标评测黄金三秒、结尾钩子、权力翻转、视觉可执行性、角色连续性和来源可追溯性。
-- **Human-in-the-loop editor**: Streamlit UI 支持 YAML 编辑、重新校验和导出。
-- **DeepSeek/OpenAI-compatible**: 支持 DeepSeek 或其他国产兼容 API；没有 API key 也可用离线 demo 生成器演示。
+- **3 章以上小说改编**：自动识别 `第一章`、`第1章`、`Chapter 1` 等章节标题。
+- **短剧节奏约束**：每章默认改编为 1 集，每集 10-15 个镜头，首镜头强 hook，尾镜头 cliffhanger。
+- **Schema 优先输出**：模型先输出 JSON，经 Pydantic 校验后再导出 YAML。
+- **来源追溯**：每集/每镜头绑定原文片段，方便作者回改和验真。
+- **视频生产就绪提示词**：每个镜头包含 `video_prompt`，便于后续接入图生视频/文生视频模型。
+- **质量评测闭环**：用硬指标评测黄金三秒、结尾钩子、权力翻转、视觉可执行性、角色连续性和来源可追溯性。
+- **人机协同编辑器**：Streamlit UI 支持 YAML 编辑、重新校验和导出。
+- **国产模型兼容**：支持 DeepSeek 或其他 OpenAI-compatible API；没有 API key 也可用离线 demo 生成器演示。
 
-## Demo Flow
+## 演示流程
 
 ```mermaid
 flowchart LR
-    A["Novel Text: 3+ Chapters"] --> B["Chapter Parser"]
-    B --> C["LLM JSON Generation"]
-    C --> D["Pydantic Validation"]
-    D --> E["YAML Export"]
-    E --> F["Editable Script Draft"]
-    E --> G["Video/TTS Pipeline Ready"]
+    A["小说文本：3 章以上"] --> B["章节解析"]
+    B --> C["大模型生成结构化 JSON"]
+    C --> D["Pydantic Schema 校验"]
+    D --> E["导出 YAML 剧本"]
+    E --> F["可编辑剧本初稿"]
+    E --> G["视频/TTS 流水线就绪"]
 ```
 
-## YAML Shape
+## YAML 结构示例
 
 ```yaml
 series_metadata:
@@ -113,39 +120,40 @@ episodes:
 source_map: []
 ```
 
-Full design notes are in [docs/YAML_SCHEMA.md](docs/YAML_SCHEMA.md).
+完整字段定义和设计原因见 [docs/YAML_SCHEMA.md](docs/YAML_SCHEMA.md)。
 
-## Quick Start
+## 快速启动
 
 ```powershell
 cd D:\03_AI_Projects\ReelForge-YAML
 python -m streamlit run app.py
 ```
 
-Open the local Streamlit URL and keep **使用离线 Demo 生成器** checked for a no-key demo. To use DeepSeek or another OpenAI-compatible API, uncheck it and provide:
+打开本地 Streamlit URL，勾选 **使用离线 Demo 生成器** 即可无密钥演示。如需使用 DeepSeek 或其他 OpenAI-compatible API，取消勾选后填写：
 
 - `API Key`
-- `Base URL`, for example `https://api.deepseek.com`
-- `Model`, for example `deepseek-chat`
+- `Base URL`，例如 `https://api.deepseek.com`
+- `Model`，例如 `deepseek-chat`
 
-## Video-ready Showcase
+## 视频生产就绪展示
 
-ReelForge does **not** require paid video generation APIs for the demo. The Streamlit app includes a **项目展示 / 视频预览** tab that turns the generated YAML into a 9:16 storyboard preview:
+ReelForge 演示不需要付费视频生成 API。Streamlit 应用内置 **项目展示 / 视频预览** 标签页，可以把已生成的 YAML 转成 9:16 分镜预览：
 
-- shot timeline
-- phone-style vertical preview
-- dialogue subtitle
-- source excerpt
-- AI video-friendly prompt
-- job-interview narration script
+- 镜头时间线
+- 手机样式竖屏预览
+- 台词字幕
+- 原文来源片段
+- AI 视频友好提示词
+- 求职/答辩讲解稿
 
-This is a low-cost way to show that the YAML is production-ready for future video/TTS/editing pipelines, while the contest core remains the reliable generation of an editable script draft.
+这个展示模式用于低成本证明 YAML 已经具备后续接入视频、TTS 和剪辑流水线的数据结构；比赛主线仍然是稳定生成可编辑的剧本初稿。
 
-## Demo Video
+## 演示视频
 
 赛事要求 demo 视频需包含声音讲解、核心功能展示和可访问外链。当前 README 先保留提交位，最终提交前请替换为实际视频链接：
 
-- Demo video: `TODO: paste bilibili / cloud drive link before final submission`
+- B 站演示视频：`TODO：录制完成后粘贴 B 站视频链接`
+- 小红书项目发布位：[王子畅的小红书主页](https://www.xiaohongshu.com/user/profile/6893b1c60000000028035e28)（发布单篇项目笔记后可替换为笔记链接）
 
 建议视频结构：
 
@@ -157,59 +165,59 @@ This is a low-cost way to show that the YAML is production-ready for future vide
 
 可直接照读的录屏脚本见 [docs/DEMO_VIDEO_SCRIPT.md](docs/DEMO_VIDEO_SCRIPT.md)。
 
-## Contest Submission Notes
+## 赛事提交说明
 
 为了匹配赛事提交要求，本仓库采用以下交付规范：
 
-- **Repository visibility**: 开发过程可保持私有以防抄袭；提交截止后需公开 GitHub/Gitee 仓库，供评委访问。
-- **PR-first workflow**: 后续所有新功能、文档补充和修复都应通过独立分支 + Pull Request 合并，不再直接提交到 `main`。
-- **Small PRs**: 每个 PR 只做一件事，例如“补 Schema 文档”“新增评测模块”“更新 demo 视频链接”。
-- **PR description**: 使用 `.github/pull_request_template.md`，必须填写功能描述、实现思路、测试方式和原创/依赖说明。
-- **Runnable main**: PR 合并前必须通过 `python -m pytest`，保证评委任意时间拉取 `main` 都能复现 demo。
-- **Commit timing**: 后续 commit 和 PR 时间应落在赛事所选批次的起止时间内；不要在最后一天一次性导入全部代码。
+- **仓库可见性**：开发过程可保持私有以防抄袭；提交截止后需公开 GitHub/Gitee 仓库，供评委访问。
+- **PR 优先流程**：后续所有新功能、文档补充和修复都应通过独立分支 + Pull Request 合并，不再直接提交到 `main`。
+- **小步提交**：每个 PR 只做一件事，例如“补 Schema 文档”“新增评测模块”“更新 demo 视频链接”。
+- **PR 描述**：使用 `.github/pull_request_template.md`，必须填写功能描述、实现思路、测试方式和原创/依赖说明。
+- **主分支可运行**：PR 合并前必须通过 `python -m pytest`，保证评委任意时间拉取 `main` 都能复现 demo。
+- **提交时间**：后续 commit 和 PR 时间应落在赛事所选批次的起止时间内；不要在最后一天一次性导入全部代码。
 
 提交前清单见 [docs/SUBMISSION_CHECKLIST.md](docs/SUBMISSION_CHECKLIST.md)。
 后续小步 PR 计划见 [docs/PR_DELIVERY_PLAN.md](docs/PR_DELIVERY_PLAN.md)。
 
-## Dependencies & Original Work
+## 依赖与原创说明
 
-Third-party dependencies are intentionally lightweight and listed in [requirements.txt](requirements.txt):
+第三方依赖保持轻量，完整列表见 [requirements.txt](requirements.txt)：
 
-| Dependency | Purpose |
+| 依赖 | 用途 |
 | --- | --- |
-| `streamlit` | Product demo UI |
-| `pydantic` | Strict schema validation |
-| `PyYAML` | YAML export/import |
-| `openai` | OpenAI-compatible client for DeepSeek or similar models |
-| `pytest` | Regression tests |
+| `streamlit` | 产品演示 UI |
+| `pydantic` | 严格 Schema 校验 |
+| `PyYAML` | YAML 导出/导入 |
+| `openai` | DeepSeek 或同类 OpenAI-compatible 模型客户端 |
+| `pytest` | 回归测试 |
 
-Original implementation in this repository includes:
+本仓库原创实现包括：
 
-- Novel chapter parsing and minimum 3-chapter validation.
-- Pydantic YAML Schema for vertical short-drama scripts.
-- JSON-first generation pipeline with YAML export.
-- Source provenance through `source_ref` and `source_map`.
-- Rule-based quality evaluator and badcase reporting.
-- Global visual scratchpad / `visual_bible` injection.
-- Critic-generator local optimization loop.
-- Streamlit human-in-the-loop editing and evaluation interface.
+- 小说章节解析和 3 章以上输入校验。
+- 面向竖屏短剧的 Pydantic YAML Schema。
+- JSON 优先生成链路和 YAML 导出。
+- 基于 `source_ref` 与 `source_map` 的来源追溯。
+- 规则化质量评测和 badcase 报告。
+- 全局视觉黑板 `visual_bible` 注入。
+- Critic-generator 局部优化闭环。
+- Streamlit 人机协同编辑与评测界面。
 
-Referenced open-source projects are listed in [References](#references). They are used as product and architecture references only; this repository implements its own schema, pipeline, evaluator, UI and tests.
+参考过的开源项目见 [参考项目](#参考项目)。这些项目只作为产品和架构参考，本仓库独立实现了自己的 Schema、生成链路、评测器、UI 和测试。
 
-## DeepSeek Evaluation Sample
+## DeepSeek 评测样例
 
-This repo includes a golden dataset, a generated evaluation novel and a real DeepSeek output:
+本仓库包含黄金样例、评测小说和真实 DeepSeek 生成结果：
 
-- Golden dataset targets: [samples/golden_dataset.yaml](samples/golden_dataset.yaml)
-- Input novel: [samples/eval_novel_shadow_contract_3ch.txt](samples/eval_novel_shadow_contract_3ch.txt)
-- Quiet transition test: [samples/eval_novel_quiet_transition_3ch.txt](samples/eval_novel_quiet_transition_3ch.txt)
-- Palace intrigue test: [samples/eval_novel_palace_lantern_3ch.txt](samples/eval_novel_palace_lantern_3ch.txt)
-- Hospital inheritance test: [samples/eval_novel_hospital_will_3ch.txt](samples/eval_novel_hospital_will_3ch.txt)
-- Midnight refund test: [samples/eval_novel_midnight_refund_3ch.txt](samples/eval_novel_midnight_refund_3ch.txt)
-- Raw DeepSeek output: [samples/deepseek_shadow_contract_3ch_output.yaml](samples/deepseek_shadow_contract_3ch_output.yaml)
-- Optimized output: [samples/deepseek_shadow_contract_3ch_optimized.yaml](samples/deepseek_shadow_contract_3ch_optimized.yaml)
+- 黄金样例目标：[samples/golden_dataset.yaml](samples/golden_dataset.yaml)
+- 输入小说：[samples/eval_novel_shadow_contract_3ch.txt](samples/eval_novel_shadow_contract_3ch.txt)
+- 安静转场测试：[samples/eval_novel_quiet_transition_3ch.txt](samples/eval_novel_quiet_transition_3ch.txt)
+- 宫斗灯会测试：[samples/eval_novel_palace_lantern_3ch.txt](samples/eval_novel_palace_lantern_3ch.txt)
+- 医院遗产测试：[samples/eval_novel_hospital_will_3ch.txt](samples/eval_novel_hospital_will_3ch.txt)
+- 午夜退款测试：[samples/eval_novel_midnight_refund_3ch.txt](samples/eval_novel_midnight_refund_3ch.txt)
+- DeepSeek 原始输出：[samples/deepseek_shadow_contract_3ch_output.yaml](samples/deepseek_shadow_contract_3ch_output.yaml)
+- 优化后输出：[samples/deepseek_shadow_contract_3ch_optimized.yaml](samples/deepseek_shadow_contract_3ch_optimized.yaml)
 
-Run the same evaluation locally:
+本地复现同样的生成评测：
 
 ```powershell
 $env:DEEPSEEK_API_KEY="your-api-key"
@@ -220,7 +228,7 @@ python scripts\run_deepseek_generation.py `
   --shots 10
 ```
 
-Then run the hard-metric evaluator:
+然后运行硬指标评测器：
 
 ```powershell
 python scripts\evaluate_yaml.py --input samples\deepseek_shadow_contract_3ch_output.yaml
@@ -231,42 +239,42 @@ python scripts\evaluate_yaml.py `
   --output samples\deepseek_shadow_contract_3ch_optimized.yaml
 ```
 
-The raw DeepSeek sample already passes the structural schema:
+DeepSeek 原始样例已经通过结构化 Schema 校验：
 
-- 3 input chapters
-- 3 generated episodes
-- 30 total shots
+- 输入 3 章
+- 生成 3 集
+- 总计 30 个镜头
 
-But the evaluator catches the key badcase: all 3 episodes label the first shot as `opening_hook`, while the actual picture still starts with atmosphere or setup. Raw scores:
+但评测器抓到了关键 badcase：3 集都把首镜头标成 `opening_hook`，实际画面却仍然偏氛围铺垫或背景介绍。原始分数：
 
 - overall_score = 0.811
 - badcases = 14
 - episode hook_score = 0.20 / 0.40 / 0.55
 
-After enabling the global scratchpad and local critic rewrite:
+启用全局视觉黑板和本地 critic 改写后：
 
 - overall_score = 0.95
 - episodes = 3
 - shots = 30
-- remaining badcases = 3 provenance notes for shots explicitly marked as adapted from context
-- each episode passes hook, cliffhanger, power shift, visual executability and continuity thresholds
+- remaining badcases = 3 个来源追溯提示，均来自明确标注为基于上下文改编的镜头
+- 每集均通过 hook、cliffhanger、权力翻转、视觉可执行性和连续性阈值
 
-Design notes for this loop are in [docs/EVALUATION.md](docs/EVALUATION.md).
+这个评测闭环的设计说明见 [docs/EVALUATION.md](docs/EVALUATION.md)。
 
-## Golden Benchmark
+## 黄金基准测试
 
-Run the full offline benchmark across all registered golden samples:
+对全部注册黄金样例运行离线基准测试：
 
 ```powershell
 python scripts\run_golden_benchmark.py
 ```
 
-Checked-in benchmark report:
+已提交的基准报告：
 
-- Markdown: [reports/golden_benchmark.md](reports/golden_benchmark.md)
+- Markdown 报告：[reports/golden_benchmark.md](reports/golden_benchmark.md)
 - JSON: [reports/golden_benchmark.json](reports/golden_benchmark.json)
 
-Current offline baseline:
+当前离线基准结果：
 
 - samples = 5
 - raw_average_score = 0.905
@@ -275,77 +283,77 @@ Current offline baseline:
 - optimized_badcases = 0
 - badcase_reduction_rate = 1.0
 
-### Iteration Evidence
+### 迭代证据
 
-This benchmark is the main proof that ReelForge is not only a schema validator:
+这个基准测试证明 ReelForge 不只是一个格式校验器：
 
-1. **Golden dataset expansion**: the benchmark now covers urban business, quiet office transition, palace intrigue, hospital inheritance and customer-service suspense.
-2. **Measured badcases**: raw offline output still exposes 75 hard-rule badcases, mainly weak visual executability.
-3. **Targeted repair**: enabling the visual scratchpad and critic rewrite loop reduces optimized hard-rule badcases to 0 across 5 samples.
-4. **Product implication**: authors get an editable YAML draft, while the tool keeps measurable guardrails for hook, cliffhanger, power shift, visual execution, continuity, dialogue language and provenance.
+1. **黄金样例扩展**：基准测试覆盖都市商战、办公室安静转场、宫斗、医院遗产和客服悬疑等题材。
+2. **badcase 可量化**：原始离线输出仍暴露 75 个硬规则 badcase，主要集中在视觉可执行性不足。
+3. **定向修复**：启用视觉黑板和 critic 改写闭环后，5 个样例的优化后硬规则 badcase 降为 0。
+4. **产品含义**：作者获得可编辑 YAML 初稿，同时工具对 hook、cliffhanger、权力翻转、视觉执行、连续性、台词语言和来源追溯保留可量化护栏。
 
-## Test
+## 测试
 
 ```powershell
 cd D:\03_AI_Projects\ReelForge-YAML
 python -m pytest
 ```
 
-Current regression checks cover:
+当前回归测试覆盖：
 
-- Rejecting inputs with fewer than 3 chapters.
-- Generating YAML that can be loaded back by `yaml.safe_load`.
-- Enforcing 10-15 shots per episode.
-- Enforcing `opening_hook` as the first shot and `cliffhanger` as the last shot.
-- Requiring English video prompts.
-- Preserving source references through `source_map`.
-- Detecting fake opening hooks, weak cliffhangers, missing power shifts, abstract video prompts and character drift.
-- Verifying the local critic loop repairs the checked-in DeepSeek badcase without changing episode or shot count.
+- 拒绝少于 3 章的输入。
+- 生成可被 `yaml.safe_load` 重新读取的 YAML。
+- 约束每集 10-15 个镜头。
+- 约束首镜头为 `opening_hook`、尾镜头为 `cliffhanger`。
+- 要求视频提示词可执行。
+- 通过 `source_map` 保留来源引用。
+- 检测假开场 hook、弱 cliffhanger、缺少权力翻转、抽象视频提示词和角色漂移。
+- 验证本地 critic 闭环能修复已提交的 DeepSeek badcase，且不改变集数和镜头数。
 
-## Project Structure
+## 项目结构
 
 ```text
-app.py                                      Streamlit product UI
-assets/logo.svg                            Project logo
-assets/banner.svg                          README banner
-src/shortdrama_yaml/schema.py              Pydantic script schema
-src/shortdrama_yaml/chapter_parser.py      Chapter boundary parser
-src/shortdrama_yaml/pipeline.py            Parse → generate → validate → export
-src/shortdrama_yaml/llm_client.py          DeepSeek/OpenAI-compatible JSON mode
-src/shortdrama_yaml/offline_generator.py   No-key demo generator
-src/shortdrama_yaml/evaluator.py           Rule-based quality metrics
-src/shortdrama_yaml/critic.py              Expert critic agent wrapper
-src/shortdrama_yaml/scratchpad.py          Global visual bible extraction/injection
-src/shortdrama_yaml/iteration.py           Critic-generator local rewrite loop
-src/shortdrama_yaml/showcase.py            No-cost storyboard showcase and JD demo script
-scripts/run_deepseek_generation.py         Real API evaluation runner
-scripts/evaluate_yaml.py                   YAML quality evaluator and optimizer
-docs/YAML_SCHEMA.md                        Schema design rationale
-docs/EVALUATION.md                         Badcase evaluation rationale
-docs/JOB_ALIGNMENT.md                      Product-manager JD alignment notes
-docs/JD_DEMO_SCRIPT.md                     90-120 second job demo narration
-samples/sample_novel_three_chapters.txt    Demo input
-tests/                                     Regression tests
+app.py                                      Streamlit 产品界面
+assets/logo.svg                            项目标志
+assets/banner.svg                          README 横幅
+src/shortdrama_yaml/schema.py              Pydantic 剧本 Schema
+src/shortdrama_yaml/chapter_parser.py      章节边界解析器
+src/shortdrama_yaml/pipeline.py            解析 → 生成 → 校验 → 导出
+src/shortdrama_yaml/llm_client.py          DeepSeek/OpenAI-compatible JSON 模式客户端
+src/shortdrama_yaml/offline_generator.py   无密钥离线 demo 生成器
+src/shortdrama_yaml/evaluator.py           规则化质量评测
+src/shortdrama_yaml/critic.py              专家 critic agent 封装
+src/shortdrama_yaml/scratchpad.py          全局视觉黑板抽取与注入
+src/shortdrama_yaml/iteration.py           Critic-generator 局部改写闭环
+src/shortdrama_yaml/showcase.py            无成本分镜展示和求职讲解稿
+scripts/run_deepseek_generation.py         真实 API 评测运行器
+scripts/evaluate_yaml.py                   YAML 质量评测和优化器
+docs/YAML_SCHEMA.md                        Schema 设计原因文档
+docs/EVALUATION.md                         badcase 评测设计说明
+docs/JOB_ALIGNMENT.md                      产品经理岗位匹配说明
+docs/JD_DEMO_SCRIPT.md                     90-120 秒求职展示讲解稿
+samples/sample_novel_three_chapters.txt    演示输入
+tests/                                     回归测试
 ```
 
-## Design Principles
+## 设计原则
 
-- **Trusted assistance over full automation**: the output is a strong editable first draft, not an unreviewed final script.
-- **JSON first, YAML second**: JSON is easier to validate; YAML is easier for authors to edit.
-- **Audio/visual separation**: `visual_track` serves image/video models; `audio_track` serves TTS, SFX and editing.
-- **Provenance by default**: `source_ref` and `source_map` reduce hallucination risk and support human review.
-- **Evaluate before celebrating**: schema validity only proves the YAML shape is correct; hard metrics prove whether it behaves like vertical short drama.
-- **Extensible pipeline**: the schema is ready for future modules such as role reference images, storyboard preview, TTS and editing workflow integration.
+- **可信辅助优先于全自动**：输出是可编辑的一版强初稿，不是未经审阅的最终剧本。
+- **先 JSON，后 YAML**：JSON 更容易校验，YAML 更方便作者编辑。
+- **音画分离**：`visual_track` 服务图像/视频模型，`audio_track` 服务 TTS、音效和剪辑。
+- **默认来源追溯**：`source_ref` 和 `source_map` 降低幻觉风险，支持人工复核。
+- **先评测，再庆祝**：Schema valid 只能证明 YAML 形状正确，硬指标才能证明它像竖屏短剧。
+- **可扩展流水线**：Schema 已为角色参考图、分镜预览、TTS 和剪辑工作流集成预留空间。
 
-## References
+## 参考项目
 
-- [NovelVids](https://github.com/Anning01/novelvids): novel-to-short-drama production workflow.
-- [Huobao Drama](https://github.com/chatfire-AI/huobao-drama): AI short drama generation agents.
-- [Jellyfish](https://github.com/Forget-C/Jellyfish): script understanding, shot preparation and asset consistency.
-- [Open-AI-Micro-Drama-Generator](https://github.com/Anil-matcha/Open-AI-Micro-Drama-Generator): multi-agent script-to-video flow.
-- [SkyScript-100M](https://github.com/vaew/SkyScript-100M): short-drama script and shooting-script dataset reference.
-- [Dramatron](https://github.com/google-deepmind/dramatron): hierarchical AI screenplay generation.
+- [NovelVids](https://github.com/Anning01/novelvids)：小说到短剧生产工作流参考。
+- [Huobao Drama](https://github.com/chatfire-AI/huobao-drama)：AI 短剧生成 agent 参考。
+- [Jellyfish](https://github.com/Forget-C/Jellyfish)：剧本理解、分镜准备和资产一致性参考。
+- [Open-AI-Micro-Drama-Generator](https://github.com/Anil-matcha/Open-AI-Micro-Drama-Generator)：多 agent 剧本到视频流程参考。
+- [SkyScript-100M](https://github.com/vaew/SkyScript-100M)：短剧剧本和拍摄脚本数据集参考。
+- [Dramatron](https://github.com/google-deepmind/dramatron)：层级化 AI 剧本生成参考。
 
-## License
+## 许可证
 
-MIT. See [LICENSE](LICENSE).
+MIT，见 [LICENSE](LICENSE)。

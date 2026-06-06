@@ -20,7 +20,7 @@
 
 ## 录屏顺序
 
-1. 打开 README，停留在项目定位和 Video-ready Showcase。
+1. 打开 README，停留在项目定位和“视频生产就绪展示”。
 2. 打开 Streamlit，展示输入区：3 章小说和章节识别。
 3. 展示生成区：YAML 初稿、episodes、shots、source_map。
 4. 展示测评区：overall score、badcases、episode scores。

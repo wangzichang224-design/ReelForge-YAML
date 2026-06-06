@@ -1,31 +1,31 @@
-# Demo Video Script
+# 演示视频脚本
 
-Use this as the narration and screen-flow script for the required contest demo video.
+用于赛事 demo 视频的讲解词和录屏流程。
 
-## Target Length
+## 目标时长
 
-3-5 minutes.
+3-5 分钟。
 
-## Video Goal
+## 视频目标
 
-Show that ReelForge YAML satisfies the contest topic: it converts 3+ chapters of novel text into an editable YAML script draft, with a documented Schema and a product rationale for reducing authors' adaptation cost.
+证明 ReelForge YAML 满足赛事题目：能把 3 章以上小说文本转换为可编辑 YAML 剧本初稿，同时提供 Schema 文档和降低作者改编门槛的产品设计原因。
 
-## Recording Checklist
+## 录屏清单
 
-- [ ] Use voice narration.
-- [ ] Show the repository README.
-- [ ] Show the Streamlit app running locally.
-- [ ] Show a 3-chapter novel input.
-- [ ] Show generated YAML.
-- [ ] Show `docs/YAML_SCHEMA.md`.
-- [ ] Show quality evaluation and badcase optimization.
-- [ ] Show YAML export.
-- [ ] Upload to a public video or cloud platform.
-- [ ] Replace the README `TODO` demo link with the real URL.
+- [ ] 使用语音讲解。
+- [ ] 展示仓库 README。
+- [ ] 展示本地运行的 Streamlit 应用。
+- [ ] 展示 3 章小说输入。
+- [ ] 展示生成后的 YAML。
+- [ ] 展示 `docs/YAML_SCHEMA.md`。
+- [ ] 展示质量评测和 badcase 优化。
+- [ ] 展示 YAML 导出。
+- [ ] 上传到 B 站或其他公开视频平台。
+- [ ] 将 README 里的 `TODO` 演示视频链接替换为真实 URL。
 
-## Narration Script
+## 讲解脚本
 
-### 1. Opening: Contest Topic And User Pain
+### 1. 开场：赛事题目与用户痛点
 
 大家好，我的作品是 ReelForge YAML，对应题目三：AI 小说转剧本工具。
 
@@ -33,19 +33,19 @@ Show that ReelForge YAML satisfies the contest topic: it converts 3+ chapters of
 
 所以我没有只做一个“让大模型写剧本”的工具，而是做成一个面向创作者工作流的 AI 辅助改编产品：把 3 章以上小说转换成可编辑、可校验、可追溯的 YAML 剧本初稿。
 
-### 2. README: Product Positioning
+### 2. README：产品定位
 
 这里是项目 README。可以看到我把赛事题目、用户痛点、需求映射和设计原因写在最前面。
 
 我把场景进一步收敛到网文转竖屏短剧，因为网文作者当前更常见的商业化方向是短剧改编。短剧对开场 hook、集内反转、结尾钩子和镜头级画面要求更高，也更需要结构化数据。
 
-### 3. App Input: Three-Chapter Novel
+### 3. 应用输入：三章小说
 
 现在打开 Streamlit demo。左侧是生成配置，可以选择离线 demo 或配置 DeepSeek / OpenAI-compatible API。
 
 在输入区，我粘贴或上传一段至少 3 章的小说文本。系统会自动识别章节边界，如果少于 3 章会直接提示不符合题目要求。
 
-### 4. Generate YAML
+### 4. 生成 YAML
 
 点击生成后，系统会完成章节解析、剧情抽取、短剧改编、镜头生成、Schema 校验和 YAML 导出。
 
@@ -58,13 +58,13 @@ Show that ReelForge YAML satisfies the contest topic: it converts 3+ chapters of
 - `shots`：每集 10-15 个镜头，有景别、运镜、画面提示词、台词、音效和来源引用。
 - `source_map`：每集和镜头对应的原文片段。
 
-### 5. Schema Document
+### 5. Schema 文档
 
 这里是 `docs/YAML_SCHEMA.md`。文档解释了为什么不用传统剧本格式，而要用镜头级 YAML。
 
 原因是 AI 视频和短剧生产更需要镜头、景别、运镜、音画分离和来源追溯。YAML 对作者可读，但模型直接输出 YAML 不稳定，所以系统采用 JSON-first：先让模型输出 JSON，再通过 Pydantic 校验，最后导出 YAML。
 
-### 6. Evaluation And Badcase Optimization
+### 6. 质量评测与 badcase 优化
 
 接下来展示“测评与优化”区。
 
@@ -85,13 +85,13 @@ Show that ReelForge YAML satisfies the contest topic: it converts 3+ chapters of
 
 这就是这个项目的迭代闭环：不是主观说“效果更好了”，而是用 golden dataset 和硬指标证明每次优化到底解决了哪些 badcase。
 
-### 7. Human-In-The-Loop Editing
+### 7. 人机协同编辑
 
 这个工具不是替作者做最终决定，而是让作者更快拿到可打磨初稿。
 
 用户可以在 YAML 编辑器里直接修改，也可以在测评区选择 cliffhanger 备选，例如身份曝光型、危机降临型、反派反扑型。选择后系统只改对应集的尾镜头，避免整篇重写导致剧情漂移。
 
-### 8. Export And Closing
+### 8. 导出与收尾
 
 最后可以下载 YAML 剧本、Schema 文档和样例输出。
 
