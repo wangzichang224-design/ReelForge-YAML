@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import sys
 from pathlib import Path
 
@@ -12,9 +13,16 @@ if str(SRC_ROOT) not in sys.path:
 
 from shortdrama_yaml.chapter_parser import split_chapters  # noqa: E402
 from shortdrama_yaml.llm_client import LLMConfig  # noqa: E402
+from shortdrama_yaml.metadata_inference import infer_novel_settings  # noqa: E402
 from shortdrama_yaml.pipeline import ConversionOptions, convert_novel_text  # noqa: E402
 from shortdrama_yaml.showcase import build_showcase_episode, render_job_demo_script  # noqa: E402
 from shortdrama_yaml.yaml_io import yaml_to_document  # noqa: E402
+
+
+DEFAULT_TITLE = "隐婚风暴"
+DEFAULT_GENRE = "都市逆袭"
+DEFAULT_TONE = "强冲突、快节奏、爽感反转"
+DEFAULT_TARGET_STYLE = "竖屏短剧，黄金三秒强冲突，人物关系强压迫，每集结尾留钩子。"
 
 
 def main() -> None:
@@ -25,6 +33,7 @@ def main() -> None:
     )
     _inject_css()
     _init_state()
+    _sync_uploaded_file_to_state()
 
     logo_path = PROJECT_ROOT / "assets" / "logo.svg"
     if logo_path.exists():
@@ -59,22 +68,83 @@ def main() -> None:
 def _init_state() -> None:
     if "novel_text" not in st.session_state:
         st.session_state["novel_text"] = _read_text(PROJECT_ROOT / "samples" / "sample_novel_three_chapters.txt")
+    st.session_state.setdefault("setting_title", DEFAULT_TITLE)
+    st.session_state.setdefault("setting_genre", DEFAULT_GENRE)
+    st.session_state.setdefault("setting_tone", DEFAULT_TONE)
+    st.session_state.setdefault("setting_target_style", DEFAULT_TARGET_STYLE)
+    st.session_state.setdefault("auto_parse_settings", True)
+    st.session_state.setdefault("last_upload_signature", "")
+    st.session_state.setdefault("uploaded_file_name", "")
+    st.session_state.setdefault("last_inferred_settings", None)
     st.session_state.setdefault("yaml_text", "")
     st.session_state.setdefault("yaml_editor", "")
     st.session_state.setdefault("warnings", [])
     st.session_state.setdefault("document", None)
 
 
+def _sync_uploaded_file_to_state() -> None:
+    uploaded = st.session_state.get("novel_upload")
+    if uploaded is None:
+        return
+
+    raw = uploaded.getvalue()
+    signature = f"{uploaded.name}:{len(raw)}:{hashlib.sha1(raw).hexdigest()[:12]}"
+    if signature == st.session_state.get("last_upload_signature"):
+        return
+
+    text = _decode_uploaded_text(raw)
+    st.session_state["novel_text"] = text
+    st.session_state["uploaded_file_name"] = uploaded.name
+    st.session_state["last_upload_signature"] = signature
+    st.session_state["yaml_text"] = ""
+    st.session_state["yaml_editor"] = ""
+    st.session_state["yaml_editor_widget"] = ""
+    st.session_state["document"] = None
+    st.session_state["warnings"] = []
+
+    if st.session_state.get("auto_parse_settings", True):
+        inferred = infer_novel_settings(text, uploaded.name)
+        st.session_state["setting_title"] = inferred.title
+        st.session_state["setting_genre"] = inferred.genre
+        st.session_state["setting_tone"] = inferred.tone
+        st.session_state["setting_target_style"] = inferred.target_style
+        st.session_state["last_inferred_settings"] = {
+            "filename": uploaded.name,
+            "title": inferred.title,
+            "genre": inferred.genre,
+            "evidence": inferred.evidence,
+        }
+
+
+def _decode_uploaded_text(raw: bytes) -> str:
+    for encoding in ("utf-8-sig", "utf-8", "gb18030"):
+        try:
+            return raw.decode(encoding)
+        except UnicodeDecodeError:
+            continue
+    return raw.decode("utf-8", errors="ignore")
+
+
 def _render_sidebar() -> dict:
     st.sidebar.header("生成配置")
-    title = st.sidebar.text_input("作品名", value="隐婚风暴")
-    genre = st.sidebar.text_input("题材", value="都市逆袭")
-    tone = st.sidebar.text_input("短剧语气", value="强冲突、快节奏、爽感反转")
+    auto_parse = st.sidebar.checkbox(
+        "上传后自动解析作品信息",
+        key="auto_parse_settings",
+        help="开启后，上传新小说会根据文件名、章节标题和正文关键词自动预填作品名、题材、语气和目标风格。",
+    )
+    title = st.sidebar.text_input("作品名", key="setting_title")
+    genre = st.sidebar.text_input("题材", key="setting_genre")
+    tone = st.sidebar.text_input("短剧语气", key="setting_tone")
     target_style = st.sidebar.text_area(
         "目标风格",
-        value="竖屏短剧，黄金三秒强冲突，人物关系强压迫，每集结尾留钩子。",
+        key="setting_target_style",
         height=90,
     )
+    inferred = st.session_state.get("last_inferred_settings")
+    if auto_parse and inferred:
+        st.sidebar.caption(
+            f"已从 `{inferred['filename']}` 自动解析：{inferred['title']} / {inferred['genre']}。"
+        )
     shots_per_episode = st.sidebar.slider("每集镜头数", min_value=10, max_value=15, value=10)
 
     st.sidebar.divider()
@@ -128,9 +198,14 @@ def _render_sidebar() -> dict:
 def _render_input_tab() -> None:
     left, right = st.columns([0.68, 0.32], gap="large")
     with left:
-        uploaded = st.file_uploader("上传小说 txt 文件", type=["txt", "md"])
-        if uploaded is not None:
-            st.session_state["novel_text"] = uploaded.read().decode("utf-8", errors="ignore")
+        st.file_uploader(
+            "上传小说 txt 文件",
+            type=["txt", "md"],
+            key="novel_upload",
+            help="上传新文件后，左侧作品名、题材、语气和目标风格会自动更新；也可以在侧边栏手动覆盖。",
+        )
+        if st.session_state.get("uploaded_file_name"):
+            st.caption(f"当前文件：{st.session_state['uploaded_file_name']}")
 
         st.session_state["novel_text"] = st.text_area(
             "小说正文（至少 3 章）",
