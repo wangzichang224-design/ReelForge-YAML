@@ -15,7 +15,7 @@
 
 - **在线试用（Streamlit）**：https://reelforge-yaml.streamlit.app/
 - **YAML Schema 文档**：[docs/YAML_SCHEMA.md](docs/YAML_SCHEMA.md)
-- **B 站演示视频**：`TODO：录制完成后粘贴 B 站视频链接`
+- **飞书演示视频**：[`TODO：录制完成后粘贴 B 站视频链接`](https://icnxh0pubbyl.feishu.cn/minutes/obcn25hl674t5ycsnjbd8932?from=from_copylink)
 - **小红书项目发布位**：[王子畅的小红书主页](https://www.xiaohongshu.com/user/profile/6893b1c60000000028035e28)（发布单篇项目笔记后可替换为笔记链接）
 - **可照读演示稿**：[docs/DEMO_VIDEO_SCRIPT.md](docs/DEMO_VIDEO_SCRIPT.md)
 
