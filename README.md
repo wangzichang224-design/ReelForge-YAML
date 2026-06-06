@@ -9,7 +9,7 @@
 **网文转竖屏短剧的结构化改编工作台。**  
 把 3 章以上小说自动转换为可编辑、可校验、可追溯的镜头级 YAML 剧本初稿，并为后续 AI 视频、TTS、音效和自动剪辑流水线预留接口。
 
-> Schema-first AI-assisted adaptation, built for trusted human-in-the-loop short-drama production.
+> 专为可信的AI短剧制作而打造剧本
 
 ## Competition Brief & Product Interpretation
 
@@ -18,6 +18,9 @@
 > 很多小说作者希望将自己的作品改编成剧本，请开发一款 AI 辅助剧本创作工具，降低改编门槛，提升效率。要求：能将 3 个章节以上的小说文本自动转换为结构化剧本（YAML 格式），让作者可以快速获得可编辑、可进一步打磨的剧本初稿。请额外写一篇文档，定义剧本的 YAML Schema。文档中需说明该 Schema 的设计原因。
 
 我对题目的产品理解是：它不只是“让大模型续写一个剧本”，而是要把小说作者从高门槛、低确定性的改编流程里解放出来，让他们先拿到一份**结构正确、可追溯、可编辑、可评测**的剧本初稿。
+定义文档
+b站视频介绍
+小红书链接https://www.xiaohongshu.com/user/profile/6893b1c60000000028035e28
 
 ### User Pain Points
 
