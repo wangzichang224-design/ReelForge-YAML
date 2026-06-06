@@ -128,6 +128,19 @@ Open the local Streamlit URL and keep **使用离线 Demo 生成器** checked fo
 - `Base URL`, for example `https://api.deepseek.com`
 - `Model`, for example `deepseek-chat`
 
+## Video-ready Showcase
+
+ReelForge does **not** require paid video generation APIs for the demo. The Streamlit app includes a **项目展示 / 视频预览** tab that turns the generated YAML into a 9:16 storyboard preview:
+
+- shot timeline
+- phone-style vertical preview
+- dialogue subtitle
+- source excerpt
+- AI video-friendly prompt
+- job-interview narration script
+
+This is a low-cost way to show that the YAML is production-ready for future video/TTS/editing pipelines, while the contest core remains the reliable generation of an editable script draft.
+
 ## Demo Video
 
 赛事要求 demo 视频需包含声音讲解、核心功能展示和可访问外链。当前 README 先保留提交位，最终提交前请替换为实际视频链接：
@@ -304,10 +317,13 @@ src/shortdrama_yaml/evaluator.py           Rule-based quality metrics
 src/shortdrama_yaml/critic.py              Expert critic agent wrapper
 src/shortdrama_yaml/scratchpad.py          Global visual bible extraction/injection
 src/shortdrama_yaml/iteration.py           Critic-generator local rewrite loop
+src/shortdrama_yaml/showcase.py            No-cost storyboard showcase and JD demo script
 scripts/run_deepseek_generation.py         Real API evaluation runner
 scripts/evaluate_yaml.py                   YAML quality evaluator and optimizer
 docs/YAML_SCHEMA.md                        Schema design rationale
 docs/EVALUATION.md                         Badcase evaluation rationale
+docs/JOB_ALIGNMENT.md                      Product-manager JD alignment notes
+docs/JD_DEMO_SCRIPT.md                     90-120 second job demo narration
 samples/sample_novel_three_chapters.txt    Demo input
 tests/                                     Regression tests
 ```
@@ -319,7 +335,7 @@ tests/                                     Regression tests
 - **Audio/visual separation**: `visual_track` serves image/video models; `audio_track` serves TTS, SFX and editing.
 - **Provenance by default**: `source_ref` and `source_map` reduce hallucination risk and support human review.
 - **Evaluate before celebrating**: schema validity only proves the YAML shape is correct; hard metrics prove whether it behaves like vertical short drama.
-- **Extensible pipeline**: the schema is ready for future modules such as role reference images, shot video generation, TTS and MoviePy/FFmpeg assembly.
+- **Extensible pipeline**: the schema is ready for future modules such as role reference images, storyboard preview, TTS and editing workflow integration.
 
 ## References
 

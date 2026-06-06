@@ -13,6 +13,7 @@ if str(SRC_ROOT) not in sys.path:
 from shortdrama_yaml.chapter_parser import split_chapters  # noqa: E402
 from shortdrama_yaml.llm_client import LLMConfig  # noqa: E402
 from shortdrama_yaml.pipeline import ConversionOptions, convert_novel_text  # noqa: E402
+from shortdrama_yaml.showcase import build_showcase_episode, render_job_demo_script  # noqa: E402
 from shortdrama_yaml.yaml_io import yaml_to_document  # noqa: E402
 
 
@@ -32,7 +33,9 @@ def main() -> None:
     st.caption("网文转竖屏短剧的结构化改编工作台｜章节 → 分集 → 镜头 → YAML → AI 视频友好提示词")
 
     settings = _render_sidebar()
-    input_tab, generate_tab, eval_tab, editor_tab, export_tab = st.tabs(["输入区", "生成区", "测评与优化", "编辑区", "导出区"])
+    input_tab, generate_tab, eval_tab, editor_tab, showcase_tab, export_tab = st.tabs(
+        ["输入区", "生成区", "测评与优化", "编辑区", "项目展示 / 视频预览", "导出区"]
+    )
 
     with input_tab:
         _render_input_tab()
@@ -45,6 +48,9 @@ def main() -> None:
 
     with editor_tab:
         _render_editor_tab()
+
+    with showcase_tab:
+        _render_showcase_tab()
 
     with export_tab:
         _render_export_tab()
@@ -297,6 +303,78 @@ def _render_editor_tab() -> None:
                 st.warning(warning)
 
 
+def _render_showcase_tab() -> None:
+    st.subheader("项目展示 / 视频预览")
+    document = _get_showcase_document()
+    if document is None:
+        st.info("请先在生成区生成 YAML，或保留 samples 里的优化样例用于展示。")
+        return
+
+    st.caption("无成本 video-ready storyboard showcase：展示剧本已经具备视频生产结构，但不调用任何付费视频生成 API。")
+    episode_labels = {
+        f"EP{episode.episode_number:02d} · {episode.episode_title}": episode.episode_number
+        for episode in document.episodes
+    }
+    selected_label = st.selectbox("选择展示集数", list(episode_labels.keys()), index=0)
+    showcase = build_showcase_episode(document, episode_labels[selected_label])
+
+    report = document.quality_report
+    score = report.overall_score if report and report.overall_score is not None else 0
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric("展示集数", f"EP{showcase.episode_number:02d}")
+    c2.metric("镜头数", len(showcase.shots))
+    c3.metric("预计时长", f"{showcase.total_duration_seconds:.0f}s")
+    c4.metric("质量评分", f"{score:.2f}" if score else "N/A")
+
+    st.markdown("**镜头时间线**")
+    st.markdown(
+        "".join(
+            f"<span class='timeline-pill'>{shot.shot_id}<br>{shot.purpose}</span>"
+            for shot in showcase.shots
+        ),
+        unsafe_allow_html=True,
+    )
+
+    selected_shot_id = st.radio(
+        "选择镜头",
+        [shot.shot_id for shot in showcase.shots],
+        horizontal=True,
+        label_visibility="collapsed",
+    )
+    selected_shot = next(shot for shot in showcase.shots if shot.shot_id == selected_shot_id)
+
+    left, right = st.columns([0.36, 0.64], gap="large")
+    with left:
+        st.markdown(
+            f"""
+            <div class="phone-frame">
+              <div class="phone-status">9:16 ReelForge Preview</div>
+              <div class="phone-scene">
+                <div class="shot-purpose">{selected_shot.purpose}</div>
+                <div class="shot-visual">{selected_shot.visual_notes}</div>
+              </div>
+              <div class="subtitle-bar">{selected_shot.subtitle}</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    with right:
+        st.markdown(f"**{selected_shot.shot_id} · {selected_shot.framing} · {selected_shot.duration_seconds:.0f}s**")
+        st.write(f"运镜：{selected_shot.camera_movement}")
+        st.write(f"来源：{selected_shot.source_chapter}")
+        st.caption(selected_shot.source_excerpt)
+        st.markdown("**AI 视频友好提示词**")
+        st.code(selected_shot.video_prompt, language="text")
+
+    st.divider()
+    st.markdown("**求职展示讲解稿**")
+    st.text_area(
+        "可直接录屏照读，重点对应岗位里的需求分析、产品设计、架构选型、代码实现和复盘沉淀。",
+        value=render_job_demo_script(document),
+        height=360,
+    )
+
+
 def _render_export_tab() -> None:
     st.subheader("导出")
     yaml_text = st.session_state.get("yaml_text") or _build_default_sample_yaml()
@@ -402,6 +480,18 @@ def _build_default_sample_yaml() -> str:
         return f"# 示例 YAML 生成失败：{exc}\n"
 
 
+def _get_showcase_document():
+    if st.session_state.get("document"):
+        return st.session_state["document"]
+    sample_yaml = PROJECT_ROOT / "samples" / "deepseek_shadow_contract_3ch_optimized.yaml"
+    if sample_yaml.exists():
+        try:
+            return yaml_to_document(_read_text(sample_yaml))
+        except Exception:
+            return None
+    return None
+
+
 def _inject_css() -> None:
     st.markdown(
         """
@@ -418,6 +508,73 @@ def _inject_css() -> None:
         .shot-card code {
             white-space: normal;
             color: #334155;
+        }
+        .timeline-pill {
+            display: inline-block;
+            min-width: 86px;
+            padding: 8px 10px;
+            margin: 4px 6px 8px 0;
+            border: 1px solid #ccd5e1;
+            border-radius: 8px;
+            background: #ffffff;
+            color: #334155;
+            font-size: 12px;
+            line-height: 1.35;
+            text-align: center;
+        }
+        .phone-frame {
+            aspect-ratio: 9 / 16;
+            max-width: 360px;
+            margin: 0 auto;
+            border-radius: 28px;
+            border: 10px solid #0f172a;
+            background: #111827;
+            color: #ffffff;
+            overflow: hidden;
+            box-shadow: 0 18px 36px rgba(15, 23, 42, 0.24);
+            display: flex;
+            flex-direction: column;
+        }
+        .phone-status {
+            padding: 10px 14px;
+            font-size: 12px;
+            color: #cbd5e1;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .phone-scene {
+            flex: 1;
+            padding: 24px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: linear-gradient(180deg, #1f2937 0%, #111827 100%);
+        }
+        .shot-purpose {
+            display: inline-block;
+            width: fit-content;
+            padding: 5px 8px;
+            border-radius: 999px;
+            background: #14b8a6;
+            color: #042f2e;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+        .shot-visual {
+            font-size: 18px;
+            line-height: 1.55;
+            font-weight: 650;
+        }
+        .subtitle-bar {
+            min-height: 84px;
+            padding: 14px 16px;
+            background: rgba(0,0,0,0.72);
+            font-size: 15px;
+            line-height: 1.45;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
         </style>
         """,
