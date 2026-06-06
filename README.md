@@ -16,7 +16,7 @@
 - **在线试用（Streamlit）**：https://reelforge-yaml.streamlit.app/
 - **YAML Schema 文档**：[docs/YAML_SCHEMA.md](docs/YAML_SCHEMA.md)
 - **飞书演示视频**：https://icnxh0pubbyl.feishu.cn/minutes/obcn25hl674t5ycsnjbd8932?from=from_copylink
-- **小红书项目发布位**：[王子畅的小红书主页](https://www.xiaohongshu.com/user/profile/6893b1c60000000028035e28)（发布单篇项目笔记后可替换为笔记链接）
+- **小红书项目发布位**：[王子畅的小红书主页](https://www.xiaohongshu.com/user/profile/6893b1c60000000028035e28)
 
 
 ## 赛事题目与产品理解
